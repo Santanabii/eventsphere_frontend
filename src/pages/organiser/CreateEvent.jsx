@@ -69,15 +69,15 @@ export default function CreateEvent() {
             Back to dashboard
           </button>
 
-          <div className="mb-8">
+          <div className="mb-10">
             <span className="eyebrow">Organiser</span>
-            <h1 className="font-display font-bold text-3xl text-text">Create new event</h1>
+            <h1 className="font-display font-bold text-3xl md:text-4xl text-text">Create new event</h1>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-6">
+          <form onSubmit={handleSubmit} className="space-y-8">
 
-            <div className="glass rounded-2xl p-6 space-y-5">
-              <h2 className="font-display font-semibold text-text">Event details</h2>
+            <div className="glass rounded-2xl p-8 space-y-6">
+              <h2 className="font-display font-semibold text-xl text-text">Event details</h2>
 
               <div>
                 <label htmlFor="title" className="field-label">Event title *</label>
@@ -138,7 +138,7 @@ export default function CreateEvent() {
                   type="file"
                   accept="image/*"
                   onChange={e => setBanner(e.target.files[0])}
-                  className="input file:mr-4 file:py-1.5 file:px-3 file:rounded-full file:border-0 file:text-xs file:bg-accent file:text-white"
+                  className="input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:bg-accent file:text-white file:cursor-pointer"
                 />
               </div>
 
@@ -156,8 +156,8 @@ export default function CreateEvent() {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-6 space-y-4">
-              <h2 className="font-display font-semibold text-text">Resale settings</h2>
+            <div className="glass rounded-2xl p-8 space-y-5">
+              <h2 className="font-display font-semibold text-xl text-text">Resale settings</h2>
 
               <div className="flex items-center justify-between">
                 <div>
@@ -169,11 +169,11 @@ export default function CreateEvent() {
                   role="switch"
                   aria-checked={form.resale_allowed}
                   onClick={() => setForm({ ...form, resale_allowed: !form.resale_allowed })}
-                  className={`w-11 h-6 rounded-full transition-colors relative flex-shrink-0 ${
+                  className={`w-12 h-7 rounded-full transition-colors relative flex-shrink-0 ${
                     form.resale_allowed ? 'bg-accent' : 'bg-border-strong'
                   }`}
                 >
-                  <div className={`w-4 h-4 rounded-full bg-white absolute top-1 transition-all ${
+                  <div className={`w-5 h-5 rounded-full bg-white absolute top-1 transition-all ${
                     form.resale_allowed ? 'right-1' : 'left-1'
                   }`} />
                 </button>
@@ -191,20 +191,20 @@ export default function CreateEvent() {
                     max="500"
                     className="input"
                   />
-                  <p className="text-xs text-text-muted mt-1.5">
+                  <p className="text-xs text-text-muted mt-2">
                     e.g. 150 means max resale price is 150% of original price
                   </p>
                 </div>
               )}
             </div>
 
-            <div className="glass rounded-2xl p-6 space-y-4">
+            <div className="glass rounded-2xl p-8 space-y-5">
               <div className="flex items-center justify-between">
-                <h2 className="font-display font-semibold text-text">Ticket tiers</h2>
+                <h2 className="font-display font-semibold text-xl text-text">Ticket tiers</h2>
                 <button
                   type="button"
                   onClick={addTier}
-                  className="flex items-center gap-1 text-sm text-accent-hover hover:text-text transition-colors"
+                  className="flex items-center gap-1.5 text-sm text-accent-hover hover:text-text transition-colors px-4 py-2 rounded-xl hover:bg-accent/5"
                 >
                   <Plus size={16} />
                   Add tier
@@ -212,7 +212,7 @@ export default function CreateEvent() {
               </div>
 
               {tiers.map((tier, i) => (
-                <div key={i} className="bg-bg-soft rounded-xl p-4 space-y-3 border border-border">
+                <div key={i} className="bg-bg-soft rounded-xl p-5 space-y-4 border border-border">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-medium text-accent-hover">Tier {i + 1}</span>
                     {tiers.length > 1 && (
@@ -220,7 +220,7 @@ export default function CreateEvent() {
                         type="button"
                         onClick={() => removeTier(i)}
                         aria-label={`Remove tier ${i + 1}`}
-                        className="text-danger hover:opacity-80 transition-opacity"
+                        className="text-danger hover:opacity-80 transition-opacity p-1"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -256,7 +256,7 @@ export default function CreateEvent() {
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-xs text-text-muted mb-1 block">Sale start</label>
+                      <label className="text-xs text-text-muted mb-1.5 block">Sale start</label>
                       <input
                         type="datetime-local"
                         value={tier.sale_start}
@@ -265,7 +265,7 @@ export default function CreateEvent() {
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-text-muted mb-1 block">Sale end</label>
+                      <label className="text-xs text-text-muted mb-1.5 block">Sale end</label>
                       <input
                         type="datetime-local"
                         value={tier.sale_end}
@@ -281,7 +281,7 @@ export default function CreateEvent() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3.5 text-[15px]"
+              className="btn-primary w-full py-4 text-[15px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

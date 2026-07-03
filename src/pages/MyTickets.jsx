@@ -55,23 +55,26 @@ export default function MyTickets() {
 
       <div className="container max-w-4xl pb-24">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-          <div className="mb-10">
+          <div className="mb-12">
             <span className="eyebrow">Your collection</span>
-            <h1 className="font-display font-bold text-3xl text-text">My tickets</h1>
-            <p className="text-text-secondary mt-1">{tickets?.length || 0} ticket{tickets?.length !== 1 ? 's' : ''}</p>
+            <h1 className="font-display font-bold text-4xl text-text">My tickets</h1>
+            <p className="text-text-secondary mt-2">{tickets?.length || 0} ticket{tickets?.length !== 1 ? 's' : ''}</p>
           </div>
 
           {isLoading ? (
             <div className="space-y-4">
               {[...Array(3)].map((_, i) => (
-                <div key={i} className="skeleton h-32" />
+                <div key={i} className="skeleton h-40" />
               ))}
             </div>
           ) : tickets?.length === 0 ? (
-            <div className="text-center py-20 card">
-              <Ticket size={40} className="text-text-muted mx-auto mb-4" />
-              <p className="text-lg font-medium text-text">No tickets yet</p>
-              <p className="text-text-muted mt-1">Purchase tickets to events to see them here</p>
+            <div className="text-center py-24 card">
+              <Ticket size={48} className="text-text-muted mx-auto mb-6" />
+              <p className="text-xl font-medium text-text">No tickets yet</p>
+              <p className="text-text-muted mt-2">Purchase tickets to events to see them here</p>
+              <Link to="/events" className="inline-block mt-6">
+                <button className="btn-primary">Browse events</button>
+              </Link>
             </div>
           ) : (
             <div className="space-y-4">
@@ -81,7 +84,7 @@ export default function MyTickets() {
                   initial={{ opacity: 0, y: 16 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.04 }}
-                  className="card p-6 flex flex-col md:flex-row gap-6"
+                  className="card p-6 flex flex-col md:flex-row gap-6 hover:-translate-y-0.5 transition-all"
                 >
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-4 mb-4">
@@ -93,26 +96,26 @@ export default function MyTickets() {
 
                     <div className="grid grid-cols-2 gap-3 text-sm">
                       <div className="flex items-center gap-2 text-text-secondary">
-                        <Calendar size={14} className="text-text-muted" />
+                        <Calendar size={14} className="text-text-muted flex-shrink-0" />
                         {formatDate(ticket.event_date)}
                       </div>
                       <div className="flex items-center gap-2 text-text-secondary">
-                        <MapPin size={14} className="text-text-muted" />
+                        <MapPin size={14} className="text-text-muted flex-shrink-0" />
                         {ticket.event_venue}
                       </div>
                       <div className="flex items-center gap-2 text-text-secondary">
-                        <Ticket size={14} className="text-text-muted" />
+                        <Ticket size={14} className="text-text-muted flex-shrink-0" />
                         {ticket.tier_name}
                       </div>
                       <div className="flex items-center gap-2 text-text-secondary">
-                        <Tag size={14} className="text-text-muted" />
+                        <Tag size={14} className="text-text-muted flex-shrink-0" />
                         KES {parseFloat(ticket.purchase_price).toLocaleString()}
                       </div>
                     </div>
 
                     <div className="mt-4 flex items-center gap-2">
-                      <QrCode size={14} className="text-text-muted" />
-                      <code className="text-xs text-text-secondary bg-bg-soft px-3 py-1 rounded-lg">
+                      <QrCode size={14} className="text-text-muted flex-shrink-0" />
+                      <code className="text-xs text-text-secondary bg-bg-soft px-3 py-1.5 rounded-lg font-mono">
                         {ticket.qr_token}
                       </code>
                     </div>
@@ -122,7 +125,7 @@ export default function MyTickets() {
                     <div className="flex md:flex-col gap-3 justify-end">
                       <button
                         onClick={() => setListingTicket(ticket)}
-                        className="btn-amber text-sm py-2 px-4 whitespace-nowrap"
+                        className="btn-amber text-sm py-2.5 px-6 whitespace-nowrap"
                       >
                         List for resale
                       </button>
@@ -145,23 +148,23 @@ export default function MyTickets() {
             onClick={() => setListingTicket(null)}
           >
             <motion.div
-              initial={{ opacity: 0, scale: 0.96 }}
+              initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.96 }}
-              className="glass rounded-2xl p-8 w-full max-w-md"
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="glass rounded-2xl p-8 md:p-10 w-full max-w-md"
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 id="list-modal-title" className="font-display font-semibold text-lg text-text">List for resale</h3>
-                <button onClick={() => setListingTicket(null)} aria-label="Close" className="text-text-muted hover:text-text">
-                  <X size={18} />
+                <h3 id="list-modal-title" className="font-display font-semibold text-xl text-text">List for resale</h3>
+                <button onClick={() => setListingTicket(null)} aria-label="Close" className="text-text-muted hover:text-text transition-colors p-2 rounded-lg hover:bg-surface">
+                  <X size={20} />
                 </button>
               </div>
 
-              <div className="card p-4 mb-6">
+              <div className="card p-5 mb-6">
                 <p className="font-medium text-text">{listingTicket.event_title}</p>
                 <p className="text-sm text-text-secondary mt-1">{listingTicket.tier_name}</p>
-                <p className="text-sm text-text-secondary">
+                <p className="text-sm text-text-secondary mt-1">
                   Original price: KES {parseFloat(listingTicket.purchase_price).toLocaleString()}
                 </p>
               </div>
@@ -184,7 +187,7 @@ export default function MyTickets() {
               <div className="flex gap-3">
                 <button
                   onClick={() => setListingTicket(null)}
-                  className="btn-ghost flex-1 py-3 text-sm"
+                  className="btn-ghost flex-1 py-3.5 text-sm"
                 >
                   Cancel
                 </button>
@@ -194,7 +197,7 @@ export default function MyTickets() {
                     asking_price: askingPrice
                   })}
                   disabled={!askingPrice || listing}
-                  className="btn-primary flex-1 py-3 text-sm"
+                  className="btn-primary flex-1 py-3.5 text-sm"
                 >
                   {listing ? 'Listing...' : 'List ticket'}
                 </button>

@@ -37,29 +37,33 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-bg flex items-center justify-center px-6 py-16 relative overflow-hidden">
       <div
-        className="orb w-64 h-64 top-1/3 right-1/4"
+        className="orb w-80 h-80 top-1/3 right-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
+      />
+      <div
+        className="orb w-60 h-60 bottom-1/4 left-1/4"
+        style={{ background: 'color-mix(in srgb, var(--color-accent) 8%, transparent)' }}
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 20 }}
+        initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
+        transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2.5">
-            <div className="w-9 h-9 rounded-lg bg-accent flex items-center justify-center">
-              <Ticket size={17} className="text-white" />
+        <div className="text-center mb-10">
+          <Link to="/" className="inline-flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
+              <Ticket size={18} className="text-white" />
             </div>
             <span className="text-xl font-display font-bold text-text">EventSphere</span>
           </Link>
-          <h1 className="font-display font-bold text-2xl text-text mt-6">Create account</h1>
-          <p className="text-text-secondary mt-1.5 text-sm">Join Kenya's hybrid event platform</p>
+          <h1 className="font-display font-bold text-3xl text-text mt-8">Create account</h1>
+          <p className="text-text-secondary mt-2 text-sm">Join Kenya's hybrid event platform</p>
         </div>
 
-        <div className="glass rounded-2xl p-8">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="glass rounded-2xl p-8 md:p-10">
+          <form onSubmit={handleSubmit} className="space-y-5">
 
             <fieldset>
               <legend className="field-label">I am a...</legend>
@@ -70,10 +74,10 @@ export default function Register() {
                     type="button"
                     onClick={() => setForm({ ...form, role })}
                     aria-pressed={form.role === role}
-                    className={`py-3 rounded-xl border text-sm font-medium capitalize transition-colors ${
+                    className={`py-3.5 rounded-xl border text-sm font-medium capitalize transition-all ${
                       form.role === role
-                        ? 'border-accent bg-accent/10 text-accent-hover'
-                        : 'border-border text-text-secondary hover:border-border-strong'
+                        ? 'border-accent bg-accent/10 text-accent-hover shadow-lg shadow-accent/5'
+                        : 'border-border text-text-secondary hover:border-border-strong hover:text-text'
                     }`}
                   >
                     {role}
@@ -146,7 +150,7 @@ export default function Register() {
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -156,7 +160,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3 text-[15px]"
+              className="btn-primary w-full py-4 text-[15px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -167,7 +171,7 @@ export default function Register() {
             </button>
           </form>
 
-          <p className="text-center text-text-secondary text-sm mt-6">
+          <p className="text-center text-text-secondary text-sm mt-8">
             Already have an account?{' '}
             <Link to="/login" className="text-accent-hover hover:text-text transition-colors font-medium">
               Sign in

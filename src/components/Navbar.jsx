@@ -18,7 +18,6 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Close the mobile drawer on route change
   useEffect(() => { setOpen(false) }, [location.pathname])
 
   const handleLogout = async () => {
@@ -40,19 +39,19 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'glass' : 'bg-transparent border-b border-transparent'
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? 'glass border-b border-border' : 'bg-transparent'
       }`}
       style={{ height: 'var(--nav-height)' }}
     >
       <div className="container h-full flex items-center justify-between">
 
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-            <Ticket size={15} className="text-white" />
+        <Link to="/" className="flex items-center gap-3 group">
+          <div className="w-9 h-9 rounded-xl bg-accent flex items-center justify-center flex-shrink-0 transition-transform group-hover:scale-105">
+            <Ticket size={16} className="text-white" />
           </div>
-          <span className="text-lg font-display font-bold text-text tracking-tight">
+          <span className="text-xl font-display font-bold text-text tracking-tight">
             EventSphere
           </span>
         </Link>
@@ -63,8 +62,10 @@ export default function Navbar() {
             <Link
               key={link.to}
               to={link.to}
-              className={`text-[14px] transition-colors ${
-                isActive(link.to) ? 'text-text font-medium' : 'text-text-secondary hover:text-text'
+              className={`text-[14px] transition-all ${
+                isActive(link.to) 
+                  ? 'text-text font-semibold border-b-2 border-accent pb-1' 
+                  : 'text-text-secondary hover:text-text'
               }`}
             >
               {link.label}
@@ -73,31 +74,33 @@ export default function Navbar() {
         </div>
 
         {/* Desktop auth */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-4">
           {user ? (
             <>
-              <div className="flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-surface border border-border">
-                <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
-                  <User size={12} className="text-white" />
+              <div className="flex items-center gap-3 pl-2 pr-4 py-1.5 rounded-full bg-surface border border-border">
+                <div className="w-7 h-7 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+                  <User size={13} className="text-white" />
                 </div>
                 <span className="text-sm text-text font-medium">{user.username}</span>
-                <span className="text-xs text-text-muted capitalize">· {user.role}</span>
+                <span className="text-xs text-text-muted capitalize bg-bg-soft px-2 py-0.5 rounded-full">
+                  {user.role}
+                </span>
               </div>
               <button
                 onClick={handleLogout}
                 aria-label="Log out"
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-text transition-colors px-2"
+                className="flex items-center gap-2 text-sm text-text-secondary hover:text-text transition-colors p-2 rounded-lg hover:bg-surface"
               >
-                <LogOut size={15} />
+                <LogOut size={16} />
               </button>
             </>
           ) : (
             <>
               <Link to="/login">
-                <button className="btn-ghost py-2 px-5 text-sm">Log in</button>
+                <button className="btn-ghost py-2.5 px-6 text-sm">Log in</button>
               </Link>
               <Link to="/register">
-                <button className="btn-primary py-2 px-5 text-sm">Get started</button>
+                <button className="btn-primary py-2.5 px-6 text-sm">Get started</button>
               </Link>
             </>
           )}
@@ -105,7 +108,7 @@ export default function Navbar() {
 
         {/* Mobile toggle */}
         <button
-          className="md:hidden text-text p-2"
+          className="md:hidden text-text p-2 rounded-lg hover:bg-surface transition-colors"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -117,12 +120,14 @@ export default function Navbar() {
       {/* Mobile drawer */}
       {open && (
         <div className="md:hidden glass border-t border-border">
-          <div className="container py-6 flex flex-col gap-5">
+          <div className="container py-8 flex flex-col gap-6">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-[15px] ${isActive(link.to) ? 'text-text font-medium' : 'text-text-secondary'}`}
+                className={`text-[15px] transition-colors ${
+                  isActive(link.to) ? 'text-text font-semibold' : 'text-text-secondary hover:text-text'
+                }`}
               >
                 {link.label}
               </Link>
@@ -131,7 +136,7 @@ export default function Navbar() {
             {user ? (
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-2 text-sm text-text-secondary"
+                className="flex items-center gap-2 text-sm text-text-secondary hover:text-text transition-colors"
               >
                 <LogOut size={15} />
                 Log out
@@ -139,10 +144,10 @@ export default function Navbar() {
             ) : (
               <div className="flex gap-3">
                 <Link to="/login" className="flex-1">
-                  <button className="btn-ghost w-full py-2.5 text-sm">Log in</button>
+                  <button className="btn-ghost w-full py-3 text-sm">Log in</button>
                 </Link>
                 <Link to="/register" className="flex-1">
-                  <button className="btn-primary w-full py-2.5 text-sm">Get started</button>
+                  <button className="btn-primary w-full py-3 text-sm">Get started</button>
                 </Link>
               </div>
             )}
