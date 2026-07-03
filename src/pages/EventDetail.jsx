@@ -81,7 +81,7 @@ export default function EventDetail() {
 
   if (!event) return (
     <div className="min-h-screen bg-bg flex items-center justify-center">
-      <p className="text-text-secondary">Event not found</p>
+      <p className="text-text-secondary text-lg">Event not found</p>
     </div>
   )
 
@@ -90,73 +90,76 @@ export default function EventDetail() {
       <Navbar />
 
       {/* Hero Banner */}
-      <div className="relative h-80 md:h-96" style={{ marginTop: 'var(--nav-height)' }}>
+      <div className="relative h-96 md:h-[440px]" style={{ marginTop: 'var(--nav-height)' }}>
         {event.banner_image ? (
           <img src={event.banner_image} alt={event.title} className="w-full h-full object-cover" />
         ) : (
           <div className="w-full h-full bg-surface" />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-bg via-bg/60 to-transparent" />
+        
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-6 left-6 flex items-center gap-2 glass px-5 py-2.5 rounded-full text-sm text-text hover:border-accent transition-all hover:shadow-lg"
+          className="absolute top-6 left-6 flex items-center gap-2.5 glass px-5 py-3 rounded-full text-sm text-text hover:border-accent transition-all hover:shadow-lg"
         >
           <ArrowLeft size={16} />
           Back
         </button>
-        <div className="absolute bottom-6 left-6 md:left-12">
-          <h1 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-text max-w-2xl">
+        
+        <div className="absolute bottom-8 left-6 md:left-12 max-w-3xl">
+          <div className="flex items-center gap-3 mb-3 flex-wrap">
+            <span className={`badge badge-success capitalize`}>{event.status}</span>
+            {event.resale_allowed && (
+              <span className="badge badge-accent">Resale enabled</span>
+            )}
+          </div>
+          <h1 className="font-display font-bold text-3xl md:text-4xl lg:text-5xl text-text leading-tight">
             {event.title}
           </h1>
         </div>
       </div>
 
-      <div className="container py-12">
+      <div className="container py-16">
         <div className="grid lg:grid-cols-3 gap-12">
 
           {/* Event Info */}
           <div className="lg:col-span-2">
             <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="flex items-center gap-3 mb-6 flex-wrap">
-                <span className={`badge badge-success capitalize`}>{event.status}</span>
-                {event.resale_allowed && (
-                  <span className="badge badge-accent">Resale enabled</span>
-                )}
-              </div>
-
-              <div className="space-y-4 mb-10">
-                <div className="flex items-start gap-4 text-text-secondary">
-                  <div className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Calendar size={18} className="text-text-secondary" />
+              <div className="space-y-5 mb-12">
+                <div className="flex items-start gap-5 text-text-secondary">
+                  <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Calendar size={20} className="text-text-secondary" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">{formatDate(event.date)}</p>
+                    <p className="text-text font-medium text-lg">{formatDate(event.date)}</p>
                     <p className="text-sm text-text-muted">{formatTime(event.date)}</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 text-text-secondary">
-                  <div className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <MapPin size={18} className="text-text-secondary" />
+                <div className="flex items-start gap-5 text-text-secondary">
+                  <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <MapPin size={20} className="text-text-secondary" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">{event.venue}</p>
+                    <p className="text-text font-medium text-lg">{event.venue}</p>
                     <p className="text-sm text-text-muted">Venue</p>
                   </div>
                 </div>
-                <div className="flex items-start gap-4 text-text-secondary">
-                  <div className="w-10 h-10 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Users size={18} className="text-text-secondary" />
+                <div className="flex items-start gap-5 text-text-secondary">
+                  <div className="w-12 h-12 rounded-xl bg-surface border border-border flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <Users size={20} className="text-text-secondary" />
                   </div>
                   <div>
-                    <p className="text-text font-medium">Organised by {event.organiser_name}</p>
+                    <p className="text-text font-medium text-lg">Organised by {event.organiser_name}</p>
                     <p className="text-sm text-text-muted">Organiser</p>
                   </div>
                 </div>
               </div>
 
-              <div className="card p-8">
-                <h3 className="font-display font-semibold text-xl text-text mb-4">About this event</h3>
-                <p className="text-text-secondary leading-relaxed whitespace-pre-wrap">{event.description}</p>
+              <div className="card p-8 md:p-10">
+                <h3 className="font-display font-semibold text-2xl text-text mb-5">About this event</h3>
+                <p className="text-text-secondary leading-relaxed text-[16px] whitespace-pre-wrap">
+                  {event.description}
+                </p>
               </div>
             </motion.div>
           </div>
@@ -167,11 +170,11 @@ export default function EventDetail() {
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.15 }}
-              className="glass rounded-2xl p-8 sticky"
+              className="glass rounded-2xl p-8 md:p-10 sticky"
               style={{ top: 'calc(var(--nav-height) + 32px)' }}
             >
-              <h3 className="font-display font-semibold text-xl text-text mb-6 flex items-center gap-3">
-                <Ticket size={20} className="text-accent" />
+              <h3 className="font-display font-semibold text-2xl text-text mb-8 flex items-center gap-3">
+                <Ticket size={22} className="text-accent" />
                 Get tickets
               </h3>
 
@@ -189,13 +192,13 @@ export default function EventDetail() {
                   >
                     <div className="flex justify-between items-start">
                       <div>
-                        <p className="font-semibold text-text">{tier.name}</p>
+                        <p className="font-semibold text-text text-[15px]">{tier.name}</p>
                         <p className="text-xs text-text-muted mt-1">
                           {tier.quantity_remaining} remaining
                         </p>
                       </div>
                       <div className="text-right">
-                        <p className="font-display font-bold text-xl text-text">
+                        <p className="font-display font-bold text-2xl text-text">
                           KES {parseFloat(tier.price).toLocaleString()}
                         </p>
                         {!tier.is_available && (
@@ -205,12 +208,12 @@ export default function EventDetail() {
                     </div>
                   </button>
                 )) : (
-                  <p className="text-text-muted text-sm text-center py-8">No tickets available yet</p>
+                  <p className="text-text-muted text-sm text-center py-10">No tickets available yet</p>
                 )}
               </div>
 
               {selectedTier && (
-                <div className="mb-6">
+                <div className="mb-8">
                   <label htmlFor="phone" className="field-label">M-Pesa phone number</label>
                   <div className="relative">
                     <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
@@ -220,22 +223,22 @@ export default function EventDetail() {
                       value={phone}
                       onChange={e => setPhone(e.target.value)}
                       placeholder="0712345678"
-                      className="input pl-11"
+                      className="input pl-11 py-3.5"
                     />
                   </div>
                 </div>
               )}
 
               {polling ? (
-                <div className="text-center py-6">
-                  <div className="spinner mx-auto mb-3" />
+                <div className="text-center py-8">
+                  <div className="spinner mx-auto mb-4" />
                   <p className="text-sm text-text-secondary">Waiting for payment confirmation...</p>
                 </div>
               ) : (
                 <button
                   onClick={handlePurchase}
                   disabled={!selectedTier || purchasing}
-                  className="btn-primary w-full py-4 text-[15px]"
+                  className="btn-primary w-full py-4.5 text-[16px]"
                 >
                   {purchasing ? (
                     <span className="flex items-center justify-center gap-2">
@@ -250,7 +253,7 @@ export default function EventDetail() {
               )}
 
               {!user && (
-                <p className="text-center text-text-muted text-xs mt-4">
+                <p className="text-center text-text-muted text-sm mt-5">
                   <button onClick={() => navigate('/login')} className="text-accent-hover hover:text-text underline font-medium">
                     Sign in
                   </button>

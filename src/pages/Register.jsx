@@ -37,11 +37,11 @@ export default function Register() {
   return (
     <div className="min-h-screen bg-bg flex items-center justify-center px-6 py-16 relative overflow-hidden">
       <div
-        className="orb w-80 h-80 top-1/3 right-1/4"
+        className="orb w-96 h-96 top-1/3 right-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
       />
       <div
-        className="orb w-60 h-60 bottom-1/4 left-1/4"
+        className="orb w-72 h-72 bottom-1/4 left-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 8%, transparent)' }}
       />
 
@@ -51,15 +51,15 @@ export default function Register() {
         transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <Link to="/" className="inline-flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
-              <Ticket size={18} className="text-white" />
+            <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
+              <Ticket size={20} className="text-white" />
             </div>
-            <span className="text-xl font-display font-bold text-text">EventSphere</span>
+            <span className="text-2xl font-display font-bold text-text">EventSphere</span>
           </Link>
-          <h1 className="font-display font-bold text-3xl text-text mt-8">Create account</h1>
-          <p className="text-text-secondary mt-2 text-sm">Join Kenya's hybrid event platform</p>
+          <h1 className="font-display font-bold text-4xl text-text mt-8">Create account</h1>
+          <p className="text-text-secondary mt-2 text-base">Join Kenya's hybrid event platform</p>
         </div>
 
         <div className="glass rounded-2xl p-8 md:p-10">
@@ -74,7 +74,7 @@ export default function Register() {
                     type="button"
                     onClick={() => setForm({ ...form, role })}
                     aria-pressed={form.role === role}
-                    className={`py-3.5 rounded-xl border text-sm font-medium capitalize transition-all ${
+                    className={`py-4 rounded-xl border text-sm font-medium capitalize transition-all ${
                       form.role === role
                         ? 'border-accent bg-accent/10 text-accent-hover shadow-lg shadow-accent/5'
                         : 'border-border text-text-secondary hover:border-border-strong hover:text-text'
@@ -89,7 +89,7 @@ export default function Register() {
             <div>
               <label htmlFor="username" className="field-label">Username</label>
               <div className="relative">
-                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="username"
                   type="text"
@@ -97,7 +97,7 @@ export default function Register() {
                   onChange={e => setForm({ ...form, username: e.target.value })}
                   placeholder="johndoe"
                   required
-                  className="input pl-11"
+                  className="input pl-12 py-3.5"
                 />
               </div>
             </div>
@@ -105,7 +105,7 @@ export default function Register() {
             <div>
               <label htmlFor="reg-email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="reg-email"
                   type="email"
@@ -113,7 +113,7 @@ export default function Register() {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="you@example.com"
                   required
-                  className="input pl-11"
+                  className="input pl-12 py-3.5"
                 />
               </div>
             </div>
@@ -121,14 +121,14 @@ export default function Register() {
             <div>
               <label htmlFor="reg-phone" className="field-label">Phone number</label>
               <div className="relative">
-                <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Phone size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="reg-phone"
                   type="tel"
                   value={form.phone_number}
                   onChange={e => setForm({ ...form, phone_number: e.target.value })}
                   placeholder="0712345678"
-                  className="input pl-11"
+                  className="input pl-12 py-3.5"
                 />
               </div>
             </div>
@@ -136,7 +136,7 @@ export default function Register() {
             <div>
               <label htmlFor="reg-password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="reg-password"
                   type={showPassword ? 'text' : 'password'}
@@ -144,7 +144,7 @@ export default function Register() {
                   onChange={e => setForm({ ...form, password: e.target.value })}
                   placeholder="Min. 8 characters"
                   required
-                  className="input pl-11 pr-11"
+                  className="input pl-12 pr-12 py-3.5"
                 />
                 <button
                   type="button"
@@ -152,7 +152,7 @@ export default function Register() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text transition-colors"
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
@@ -160,7 +160,7 @@ export default function Register() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-4 text-[15px]"
+              className="btn-primary w-full py-4.5 text-[16px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

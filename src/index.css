@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 /* ─────────────────────────────────────────────
-   DESIGN TOKENS — Tailwind v4 theme
+   DESIGN TOKENS
 ───────────────────────────────────────────── */
 @theme {
   --color-bg: #0A0A10;
@@ -23,11 +23,19 @@
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
   --nav-height: 72px;
+  
+  /* Enhanced spacing tokens */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  --spacing-3xl: 64px;
+  --spacing-4xl: 80px;
 }
 
-/* ─────────────────────────────────────────────
-   GLOBAL RESET & BASE
-───────────────────────────────────────────── */
+/* ── Reset ── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -43,41 +51,46 @@ body {
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.7;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-::selection {
-  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+/* ── Enhanced Typography ── */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
 }
 
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--color-bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
-  border-radius: 99px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+h1 {
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  letter-spacing: -0.03em;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+h2 {
+  font-size: clamp(2rem, 3.5vw, 3.25rem);
+  letter-spacing: -0.025em;
 }
 
-/* ─────────────────────────────────────────────
-   LAYOUT
-───────────────────────────────────────────── */
+h3 {
+  font-size: clamp(1.25rem, 2vw, 1.75rem);
+  letter-spacing: -0.02em;
+}
+
+h4 {
+  font-size: clamp(1.1rem, 1.5vw, 1.35rem);
+  letter-spacing: -0.015em;
+}
+
+p {
+  line-height: 1.8;
+  color: var(--color-text-secondary);
+}
+
+/* ── Layout ── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -87,7 +100,7 @@ body {
 .page {
   min-height: 100vh;
   background: var(--color-bg);
-  padding-top: calc(var(--nav-height) + 48px);
+  padding-top: calc(var(--nav-height) + 56px);
 }
 
 .section {
@@ -97,16 +110,15 @@ body {
   padding: 60px 0;
 }
 
-/* ─────────────────────────────────────────────
-   GLASS / SURFACES
-───────────────────────────────────────────── */
+/* ── Glass ── */
 .glass {
-  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
+  background: rgba(19, 19, 25, 0.82);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid var(--color-border);
 }
 
+/* ── Cards ── */
 .card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -120,25 +132,24 @@ body {
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ─────────────────────────────────────────────
-   BUTTONS
-───────────────────────────────────────────── */
+/* ── Enhanced Buttons ── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: var(--color-accent);
   color: #fff;
-  padding: 14px 32px;
+  padding: 16px 36px;
   border-radius: 12px;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   border: none;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   text-decoration: none;
   font-family: var(--font-body);
+  letter-spacing: 0.01em;
 }
 
 .btn-primary:hover:not(:disabled) {
@@ -155,13 +166,13 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 10px;
   background: transparent;
   color: var(--color-text);
-  padding: 13px 32px;
+  padding: 15px 36px;
   border-radius: 12px;
   font-weight: 500;
-  font-size: 14px;
+  font-size: 15px;
   border: 1px solid var(--color-border-strong);
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
@@ -204,11 +215,17 @@ button:disabled {
   transform: none !important;
 }
 
-/* ─────────────────────────────────────────────
-   TYPOGRAPHY
-───────────────────────────────────────────── */
+/* ── Typography Utilities ── */
 .font-display {
   font-family: var(--font-display);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.text-pretty {
+  text-wrap: pretty;
 }
 
 .eyebrow {
@@ -218,20 +235,20 @@ button:disabled {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--color-text-muted);
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .badge {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  padding: 4px 14px;
+  padding: 5px 16px;
   border-radius: 99px;
   font-size: 11px;
   font-weight: 600;
   border: 1px solid transparent;
   text-transform: uppercase;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.04em;
 }
 
 .badge-accent {
@@ -262,11 +279,10 @@ button:disabled {
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
   border: none;
+  margin: 0;
 }
 
-/* ─────────────────────────────────────────────
-   ORBS (Hero glow effects)
-───────────────────────────────────────────── */
+/* ── Orbs ── */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -275,15 +291,14 @@ button:disabled {
   z-index: 0;
 }
 
-/* ─────────────────────────────────────────────
-   INPUTS
-───────────────────────────────────────────── */
+/* ── Inputs ── */
 .field-label {
   font-size: 13px;
   font-weight: 500;
   color: var(--color-text-secondary);
   margin-bottom: 8px;
   display: block;
+  letter-spacing: 0.02em;
 }
 
 .input {
@@ -291,7 +306,7 @@ button:disabled {
   background: var(--color-bg-soft);
   border: 1px solid var(--color-border);
   border-radius: 12px;
-  padding: 14px 16px;
+  padding: 14px 18px;
   color: var(--color-text);
   font-family: var(--font-body);
   font-size: 14px;
@@ -319,18 +334,7 @@ button:focus-visible {
   border-radius: 8px;
 }
 
-/* ─────────────────────────────────────────────
-   GRIDS
-───────────────────────────────────────────── */
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-/* ─────────────────────────────────────────────
-   SKELETON LOADING
-───────────────────────────────────────────── */
+/* ── Skeleton ── */
 .skeleton {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -343,7 +347,7 @@ button:focus-visible {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 4%, transparent), transparent);
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 3%, transparent), transparent);
   animation: shimmer 1.6s infinite;
 }
 
@@ -365,9 +369,7 @@ button:focus-visible {
   to { transform: rotate(360deg); }
 }
 
-/* ─────────────────────────────────────────────
-   RESPONSIVE
-───────────────────────────────────────────── */
+/* ── Responsive ── */
 @media (max-width: 992px) {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);

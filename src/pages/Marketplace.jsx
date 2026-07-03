@@ -80,11 +80,11 @@ export default function Marketplace() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center mb-12"
+          className="text-center max-w-3xl mx-auto mb-16"
         >
           <span className="eyebrow">Secondary market</span>
-          <h1 className="font-display font-bold text-4xl md:text-5xl text-text">Ticket marketplace</h1>
-          <p className="text-text-secondary mt-2 max-w-xl mx-auto">Buy resale tickets safely — all transfers are verified and fraud-protected</p>
+          <h1 className="font-display font-bold text-5xl md:text-6xl text-text mb-3">Ticket marketplace</h1>
+          <p className="text-text-secondary text-lg">Buy resale tickets safely — all transfers are verified and fraud-protected</p>
         </motion.div>
 
         <div className="grid grid-cols-3 gap-4 mb-12 max-w-lg mx-auto">
@@ -93,9 +93,9 @@ export default function Marketplace() {
             { label: 'Safe transfers', value: '100%' },
             { label: 'Platform fee', value: '10%' },
           ].map((s, i) => (
-            <div key={i} className="card p-6 text-center">
-              <p className="font-display font-bold text-2xl text-text">{s.value}</p>
-              <p className="text-xs text-text-muted mt-1.5">{s.label}</p>
+            <div key={i} className="card p-6 text-center hover:-translate-y-0.5 transition-all">
+              <p className="font-display font-bold text-3xl text-text">{s.value}</p>
+              <p className="text-sm text-text-muted mt-1.5">{s.label}</p>
             </div>
           ))}
         </div>
@@ -103,13 +103,13 @@ export default function Marketplace() {
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
-              <div key={i} className="skeleton h-64" />
+              <div key={i} className="skeleton h-72" />
             ))}
           </div>
         ) : listings?.length === 0 ? (
-          <div className="text-center py-24 card">
-            <ShoppingBag size={48} className="text-text-muted mx-auto mb-6" />
-            <p className="text-xl font-medium text-text">No listings yet</p>
+          <div className="text-center py-32 card">
+            <ShoppingBag size={56} className="text-text-muted mx-auto mb-6" />
+            <p className="text-2xl font-medium text-text">No listings yet</p>
             <p className="text-text-muted mt-2">Be the first to list a ticket for resale</p>
           </div>
         ) : (
@@ -119,35 +119,35 @@ export default function Marketplace() {
               return (
                 <motion.div
                   key={listing.id}
-                  initial={{ opacity: 0, y: 16 }}
+                  initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: i * 0.04 }}
-                  className="card p-6 flex flex-col transition-all hover:-translate-y-1"
+                  transition={{ delay: i * 0.05 }}
+                  className="card p-6 flex flex-col transition-all hover:-translate-y-1.5"
                 >
-                  <div className="flex justify-between items-start mb-4 gap-2">
-                    <h3 className="font-display font-semibold text-text text-lg line-clamp-1">{listing.event_title}</h3>
-                    <span className="badge badge-accent whitespace-nowrap text-xs">{listing.tier_name}</span>
+                  <div className="flex justify-between items-start mb-4 gap-3">
+                    <h3 className="font-display font-semibold text-text text-xl line-clamp-1">{listing.event_title}</h3>
+                    <span className="badge badge-accent whitespace-nowrap text-[10px]">{listing.tier_name}</span>
                   </div>
 
-                  <div className="space-y-2.5 mb-4 flex-1">
-                    <div className="flex items-center gap-2.5 text-sm text-text-secondary">
-                      <Calendar size={13} className="text-text-muted flex-shrink-0" />
-                      {formatDate(listing.event_date)}
+                  <div className="space-y-3 mb-4 flex-1">
+                    <div className="flex items-center gap-3 text-sm text-text-secondary">
+                      <Calendar size={14} className="text-text-muted flex-shrink-0" />
+                      <span>{formatDate(listing.event_date)}</span>
                     </div>
-                    <div className="flex items-center gap-2.5 text-sm text-text-secondary">
-                      <MapPin size={13} className="text-text-muted flex-shrink-0" />
-                      {listing.event_venue}
+                    <div className="flex items-center gap-3 text-sm text-text-secondary">
+                      <MapPin size={14} className="text-text-muted flex-shrink-0" />
+                      <span>{listing.event_venue}</span>
                     </div>
-                    <div className="flex items-center gap-2.5 text-sm text-text-secondary">
-                      <Tag size={13} className="text-text-muted flex-shrink-0" />
-                      Original: KES {parseFloat(listing.original_price).toLocaleString()}
+                    <div className="flex items-center gap-3 text-sm text-text-secondary">
+                      <Tag size={14} className="text-text-muted flex-shrink-0" />
+                      <span>Original: KES {parseFloat(listing.original_price).toLocaleString()}</span>
                     </div>
                   </div>
 
                   <div className="border-t border-border pt-4 flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-text-muted">Asking price</p>
-                      <p className="font-display font-bold text-xl text-text">
+                      <p className="text-xs text-text-muted font-medium uppercase tracking-wider">Asking price</p>
+                      <p className="font-display font-bold text-2xl text-text">
                         KES {parseFloat(listing.asking_price).toLocaleString()}
                       </p>
                       <div className="flex items-center gap-1.5 mt-1">
@@ -164,7 +164,7 @@ export default function Marketplace() {
                         if (!user) { navigate('/login'); return }
                         setBuyingListing(listing)
                       }}
-                      className="btn-primary text-sm py-2.5 px-6"
+                      className="btn-primary text-sm py-3 px-7"
                     >
                       Buy now
                     </button>
@@ -193,7 +193,7 @@ export default function Marketplace() {
               onClick={(e) => e.stopPropagation()}
             >
               <div className="flex items-center justify-between mb-6">
-                <h3 id="buy-modal-title" className="font-display font-semibold text-xl text-text">Complete purchase</h3>
+                <h3 id="buy-modal-title" className="font-display font-semibold text-2xl text-text">Complete purchase</h3>
                 <button
                   onClick={() => { setBuyingListing(null); setPhone('') }}
                   aria-label="Close"
@@ -204,9 +204,9 @@ export default function Marketplace() {
               </div>
 
               <div className="card p-5 mb-6">
-                <p className="font-medium text-text">{buyingListing.event_title}</p>
+                <p className="font-medium text-text text-lg">{buyingListing.event_title}</p>
                 <p className="text-sm text-text-secondary mt-1">{buyingListing.tier_name} · {buyingListing.event_venue}</p>
-                <p className="font-display font-bold text-2xl text-text mt-3">
+                <p className="font-display font-bold text-3xl text-text mt-3">
                   KES {parseFloat(buyingListing.asking_price).toLocaleString()}
                 </p>
                 <p className="text-xs text-text-muted mt-1.5">
@@ -214,7 +214,7 @@ export default function Marketplace() {
                 </p>
               </div>
 
-              <div className="mb-6">
+              <div className="mb-8">
                 <label htmlFor="buy-phone" className="field-label">M-Pesa phone number</label>
                 <div className="relative">
                   <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
@@ -224,7 +224,7 @@ export default function Marketplace() {
                     value={phone}
                     onChange={e => setPhone(e.target.value)}
                     placeholder="0712345678"
-                    className="input pl-11"
+                    className="input pl-12 py-3.5"
                   />
                 </div>
               </div>
@@ -232,14 +232,14 @@ export default function Marketplace() {
               <div className="flex gap-3">
                 <button
                   onClick={() => { setBuyingListing(null); setPhone('') }}
-                  className="btn-ghost flex-1 py-3.5 text-sm"
+                  className="btn-ghost flex-1 py-4 text-sm"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handlePurchase}
                   disabled={purchasing || !phone}
-                  className="btn-primary flex-1 py-3.5 text-sm"
+                  className="btn-primary flex-1 py-4 text-sm"
                 >
                   {purchasing ? 'Processing...' : 'Pay via M-Pesa'}
                 </button>

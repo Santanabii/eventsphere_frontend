@@ -31,11 +31,11 @@ export default function Login() {
   return (
     <div className="min-h-screen bg-bg flex items-center justify-center px-6 py-16 relative overflow-hidden">
       <div
-        className="orb w-80 h-80 top-1/3 left-1/4"
+        className="orb w-96 h-96 top-1/3 left-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
       />
       <div
-        className="orb w-60 h-60 bottom-1/4 right-1/4"
+        className="orb w-72 h-72 bottom-1/4 right-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 8%, transparent)' }}
       />
 
@@ -45,15 +45,15 @@ export default function Login() {
         transition={{ duration: 0.5 }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="text-center mb-10">
+        <div className="text-center mb-12">
           <Link to="/" className="inline-flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-accent flex items-center justify-center">
-              <Ticket size={18} className="text-white" />
+            <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
+              <Ticket size={20} className="text-white" />
             </div>
-            <span className="text-xl font-display font-bold text-text">EventSphere</span>
+            <span className="text-2xl font-display font-bold text-text">EventSphere</span>
           </Link>
-          <h1 className="font-display font-bold text-3xl text-text mt-8">Welcome back</h1>
-          <p className="text-text-secondary mt-2 text-sm">Sign in to your account</p>
+          <h1 className="font-display font-bold text-4xl text-text mt-8">Welcome back</h1>
+          <p className="text-text-secondary mt-2 text-base">Sign in to your account</p>
         </div>
 
         <div className="glass rounded-2xl p-8 md:p-10">
@@ -62,7 +62,7 @@ export default function Login() {
             <div>
               <label htmlFor="email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="email"
                   type="email"
@@ -70,7 +70,7 @@ export default function Login() {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="you@example.com"
                   required
-                  className="input pl-11"
+                  className="input pl-12 py-3.5"
                 />
               </div>
             </div>
@@ -78,7 +78,7 @@ export default function Login() {
             <div>
               <label htmlFor="password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -86,7 +86,7 @@ export default function Login() {
                   onChange={e => setForm({ ...form, password: e.target.value })}
                   placeholder="••••••••"
                   required
-                  className="input pl-11 pr-11"
+                  className="input pl-12 pr-12 py-3.5"
                 />
                 <button
                   type="button"
@@ -94,7 +94,7 @@ export default function Login() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text transition-colors"
                 >
-                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                 </button>
               </div>
             </div>
@@ -102,7 +102,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-4 text-[15px]"
+              className="btn-primary w-full py-4.5 text-[16px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">

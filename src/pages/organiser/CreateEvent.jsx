@@ -63,21 +63,22 @@ export default function CreateEvent() {
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <button
             onClick={() => navigate(-1)}
-            className="flex items-center gap-2 text-text-secondary hover:text-text transition-colors mb-8 text-sm"
+            className="flex items-center gap-2.5 text-text-secondary hover:text-text transition-colors mb-10 text-sm"
           >
             <ArrowLeft size={16} />
             Back to dashboard
           </button>
 
-          <div className="mb-10">
+          <div className="mb-12">
             <span className="eyebrow">Organiser</span>
-            <h1 className="font-display font-bold text-3xl md:text-4xl text-text">Create new event</h1>
+            <h1 className="font-display font-bold text-4xl md:text-5xl text-text">Create new event</h1>
+            <p className="text-text-secondary text-lg mt-2">Set up your event and start selling tickets</p>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
 
-            <div className="glass rounded-2xl p-8 space-y-6">
-              <h2 className="font-display font-semibold text-xl text-text">Event details</h2>
+            <div className="glass rounded-2xl p-8 md:p-10 space-y-6">
+              <h2 className="font-display font-semibold text-2xl text-text">Event details</h2>
 
               <div>
                 <label htmlFor="title" className="field-label">Event title *</label>
@@ -88,7 +89,7 @@ export default function CreateEvent() {
                   onChange={e => setForm({ ...form, title: e.target.value })}
                   placeholder="e.g. Afro Night Nairobi 2026"
                   required
-                  className="input"
+                  className="input py-3.5"
                 />
               </div>
 
@@ -100,8 +101,8 @@ export default function CreateEvent() {
                   onChange={e => setForm({ ...form, description: e.target.value })}
                   placeholder="Tell people about your event..."
                   required
-                  rows={4}
-                  className="input resize-none"
+                  rows={5}
+                  className="input resize-none py-3.5"
                 />
               </div>
 
@@ -115,7 +116,7 @@ export default function CreateEvent() {
                     onChange={e => setForm({ ...form, venue: e.target.value })}
                     placeholder="e.g. KICC Nairobi"
                     required
-                    className="input"
+                    className="input py-3.5"
                   />
                 </div>
                 <div>
@@ -126,7 +127,7 @@ export default function CreateEvent() {
                     value={form.date}
                     onChange={e => setForm({ ...form, date: e.target.value })}
                     required
-                    className="input"
+                    className="input py-3.5"
                   />
                 </div>
               </div>
@@ -138,7 +139,7 @@ export default function CreateEvent() {
                   type="file"
                   accept="image/*"
                   onChange={e => setBanner(e.target.files[0])}
-                  className="input file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-xs file:bg-accent file:text-white file:cursor-pointer"
+                  className="input file:mr-4 file:py-2.5 file:px-5 file:rounded-full file:border-0 file:text-xs file:bg-accent file:text-white file:cursor-pointer file:font-medium py-3.5"
                 />
               </div>
 
@@ -148,7 +149,7 @@ export default function CreateEvent() {
                   id="status"
                   value={form.status}
                   onChange={e => setForm({ ...form, status: e.target.value })}
-                  className="input"
+                  className="input py-3.5"
                 >
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
@@ -156,24 +157,24 @@ export default function CreateEvent() {
               </div>
             </div>
 
-            <div className="glass rounded-2xl p-8 space-y-5">
-              <h2 className="font-display font-semibold text-xl text-text">Resale settings</h2>
+            <div className="glass rounded-2xl p-8 md:p-10 space-y-6">
+              <h2 className="font-display font-semibold text-2xl text-text">Resale settings</h2>
 
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-text text-sm font-medium">Allow ticket resale</p>
-                  <p className="text-xs text-text-muted mt-0.5">Let attendees resell their tickets</p>
+                  <p className="text-text text-base font-medium">Allow ticket resale</p>
+                  <p className="text-sm text-text-muted mt-0.5">Let attendees resell their tickets</p>
                 </div>
                 <button
                   type="button"
                   role="switch"
                   aria-checked={form.resale_allowed}
                   onClick={() => setForm({ ...form, resale_allowed: !form.resale_allowed })}
-                  className={`w-12 h-7 rounded-full transition-colors relative flex-shrink-0 ${
+                  className={`w-14 h-8 rounded-full transition-colors relative flex-shrink-0 ${
                     form.resale_allowed ? 'bg-accent' : 'bg-border-strong'
                   }`}
                 >
-                  <div className={`w-5 h-5 rounded-full bg-white absolute top-1 transition-all ${
+                  <div className={`w-6 h-6 rounded-full bg-white absolute top-1 transition-all ${
                     form.resale_allowed ? 'right-1' : 'left-1'
                   }`} />
                 </button>
@@ -189,24 +190,24 @@ export default function CreateEvent() {
                     onChange={e => setForm({ ...form, resale_price_cap: e.target.value })}
                     min="100"
                     max="500"
-                    className="input"
+                    className="input py-3.5"
                   />
-                  <p className="text-xs text-text-muted mt-2">
+                  <p className="text-sm text-text-muted mt-2">
                     e.g. 150 means max resale price is 150% of original price
                   </p>
                 </div>
               )}
             </div>
 
-            <div className="glass rounded-2xl p-8 space-y-5">
+            <div className="glass rounded-2xl p-8 md:p-10 space-y-6">
               <div className="flex items-center justify-between">
-                <h2 className="font-display font-semibold text-xl text-text">Ticket tiers</h2>
+                <h2 className="font-display font-semibold text-2xl text-text">Ticket tiers</h2>
                 <button
                   type="button"
                   onClick={addTier}
-                  className="flex items-center gap-1.5 text-sm text-accent-hover hover:text-text transition-colors px-4 py-2 rounded-xl hover:bg-accent/5"
+                  className="flex items-center gap-2 text-sm text-accent-hover hover:text-text transition-colors px-4 py-2.5 rounded-xl hover:bg-accent/5"
                 >
-                  <Plus size={16} />
+                  <Plus size={18} />
                   Add tier
                 </button>
               </div>
@@ -222,7 +223,7 @@ export default function CreateEvent() {
                         aria-label={`Remove tier ${i + 1}`}
                         className="text-danger hover:opacity-80 transition-opacity p-1"
                       >
-                        <Trash2 size={16} />
+                        <Trash2 size={18} />
                       </button>
                     )}
                   </div>
@@ -234,7 +235,7 @@ export default function CreateEvent() {
                       onChange={e => updateTier(i, 'name', e.target.value)}
                       placeholder="e.g. VIP"
                       aria-label={`Tier ${i + 1} name`}
-                      className="input py-2.5 text-sm"
+                      className="input py-3 text-sm"
                     />
                     <input
                       type="number"
@@ -242,7 +243,7 @@ export default function CreateEvent() {
                       onChange={e => updateTier(i, 'price', e.target.value)}
                       placeholder="Price (KES)"
                       aria-label={`Tier ${i + 1} price`}
-                      className="input py-2.5 text-sm"
+                      className="input py-3 text-sm"
                     />
                     <input
                       type="number"
@@ -250,27 +251,27 @@ export default function CreateEvent() {
                       onChange={e => updateTier(i, 'quantity', e.target.value)}
                       placeholder="Quantity"
                       aria-label={`Tier ${i + 1} quantity`}
-                      className="input py-2.5 text-sm"
+                      className="input py-3 text-sm"
                     />
                   </div>
 
                   <div className="grid grid-cols-2 gap-3">
                     <div>
-                      <label className="text-xs text-text-muted mb-1.5 block">Sale start</label>
+                      <label className="text-xs text-text-muted mb-1.5 block font-medium uppercase tracking-wider">Sale start</label>
                       <input
                         type="datetime-local"
                         value={tier.sale_start}
                         onChange={e => updateTier(i, 'sale_start', e.target.value)}
-                        className="input py-2.5 text-sm"
+                        className="input py-3 text-sm"
                       />
                     </div>
                     <div>
-                      <label className="text-xs text-text-muted mb-1.5 block">Sale end</label>
+                      <label className="text-xs text-text-muted mb-1.5 block font-medium uppercase tracking-wider">Sale end</label>
                       <input
                         type="datetime-local"
                         value={tier.sale_end}
                         onChange={e => updateTier(i, 'sale_end', e.target.value)}
-                        className="input py-2.5 text-sm"
+                        className="input py-3 text-sm"
                       />
                     </div>
                   </div>
@@ -281,7 +282,7 @@ export default function CreateEvent() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-4 text-[15px]"
+              className="btn-primary w-full py-5 text-[16px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
