@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
 
 /* ─────────────────────────────────────────────
-   DESIGN TOKENS — single source of truth.
+   DESIGN TOKENS — Tailwind v4 theme
 ───────────────────────────────────────────── */
 @theme {
   --color-bg: #0A0A10;
@@ -11,25 +11,23 @@
   --color-surface-hover: #17171F;
   --color-border: #1E1E27;
   --color-border-strong: #2A2A36;
-
   --color-text: #EDEDF2;
   --color-text-secondary: #8E8E9C;
   --color-text-muted: #5A5A68;
-
   --color-accent: #8B7CF6;
   --color-accent-hover: #A296F9;
   --color-amber: #D4A15E;
-
   --color-success: #4ADE80;
   --color-warning: #E8B95E;
   --color-danger: #F0685C;
-
   --font-display: 'Syne', sans-serif;
   --font-body: 'DM Sans', sans-serif;
-
   --nav-height: 72px;
 }
 
+/* ─────────────────────────────────────────────
+   GLOBAL RESET & BASE
+───────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -77,16 +75,15 @@ body {
   }
 }
 
-@layer components {
-
-/* ── Layout ── */
+/* ─────────────────────────────────────────────
+   LAYOUT
+───────────────────────────────────────────── */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 32px;
 }
 
-/* Standard page wrapper — consistent offset below the fixed navbar */
 .page {
   min-height: 100vh;
   background: var(--color-bg);
@@ -100,7 +97,9 @@ body {
   padding: 60px 0;
 }
 
-/* ── Glass / surfaces ── */
+/* ─────────────────────────────────────────────
+   GLASS / SURFACES
+───────────────────────────────────────────── */
 .glass {
   background: color-mix(in srgb, var(--color-surface) 78%, transparent);
   backdrop-filter: blur(20px);
@@ -112,15 +111,18 @@ body {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card:hover {
   border-color: var(--color-border-strong);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
 
-/* ── Buttons ── */
+/* ─────────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
@@ -128,23 +130,25 @@ body {
   gap: 8px;
   background: var(--color-accent);
   color: #fff;
-  padding: 12px 28px;
+  padding: 14px 32px;
   border-radius: 12px;
   font-weight: 600;
   font-size: 14px;
   border: none;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   text-decoration: none;
   font-family: var(--font-body);
 }
+
 .btn-primary:hover:not(:disabled) {
   background: var(--color-accent-hover);
-  transform: translateY(-1px);
-  box-shadow: 0 4px 20px rgba(139, 124, 246, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(139, 124, 246, 0.35);
 }
+
 .btn-primary:active:not(:disabled) {
-  transform: scale(0.98);
+  transform: scale(0.97);
 }
 
 .btn-ghost {
@@ -154,20 +158,21 @@ body {
   gap: 8px;
   background: transparent;
   color: var(--color-text);
-  padding: 11px 28px;
+  padding: 13px 32px;
   border-radius: 12px;
   font-weight: 500;
   font-size: 14px;
   border: 1px solid var(--color-border-strong);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   text-decoration: none;
   font-family: var(--font-body);
 }
+
 .btn-ghost:hover:not(:disabled) {
   border-color: var(--color-accent);
   background: color-mix(in srgb, var(--color-accent) 8%, transparent);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .btn-amber {
@@ -177,27 +182,31 @@ body {
   gap: 8px;
   background: transparent;
   color: var(--color-amber);
-  padding: 11px 24px;
+  padding: 13px 28px;
   border-radius: 12px;
   font-weight: 500;
   font-size: 14px;
   border: 1px solid color-mix(in srgb, var(--color-amber) 40%, transparent);
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
   font-family: var(--font-body);
 }
+
 .btn-amber:hover:not(:disabled) {
   background: color-mix(in srgb, var(--color-amber) 10%, transparent);
   border-color: var(--color-amber);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 button:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+  transform: none !important;
 }
 
-/* ── Typography ── */
+/* ─────────────────────────────────────────────
+   TYPOGRAPHY
+───────────────────────────────────────────── */
 .font-display {
   font-family: var(--font-display);
 }
@@ -218,25 +227,31 @@ button:disabled {
   gap: 6px;
   padding: 4px 14px;
   border-radius: 99px;
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 11px;
+  font-weight: 600;
   border: 1px solid transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
+
 .badge-accent {
   background: color-mix(in srgb, var(--color-accent) 12%, transparent);
   color: var(--color-accent-hover);
   border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
 }
+
 .badge-success {
   background: color-mix(in srgb, var(--color-success) 12%, transparent);
   color: var(--color-success);
   border-color: color-mix(in srgb, var(--color-success) 25%, transparent);
 }
+
 .badge-warning {
   background: color-mix(in srgb, var(--color-warning) 12%, transparent);
   color: var(--color-warning);
   border-color: color-mix(in srgb, var(--color-warning) 25%, transparent);
 }
+
 .badge-muted {
   background: color-mix(in srgb, var(--color-text-muted) 14%, transparent);
   color: var(--color-text-secondary);
@@ -249,7 +264,9 @@ button:disabled {
   border: none;
 }
 
-/* ── Orbs ── */
+/* ─────────────────────────────────────────────
+   ORBS (Hero glow effects)
+───────────────────────────────────────────── */
 .orb {
   position: absolute;
   border-radius: 50%;
@@ -258,7 +275,9 @@ button:disabled {
   z-index: 0;
 }
 
-/* ── Inputs ── */
+/* ─────────────────────────────────────────────
+   INPUTS
+───────────────────────────────────────────── */
 .field-label {
   font-size: 13px;
   font-weight: 500;
@@ -277,20 +296,22 @@ button:disabled {
   font-family: var(--font-body);
   font-size: 14px;
   outline: none;
-  transition: all 0.2s ease;
+  transition: all 0.25s ease;
 }
+
 .input:hover {
   border-color: var(--color-border-strong);
 }
+
 .input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-accent) 15%, transparent);
 }
+
 .input::placeholder {
   color: var(--color-text-muted);
 }
 
-/* Visible keyboard focus everywhere */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-accent);
@@ -298,14 +319,18 @@ button:focus-visible {
   border-radius: 8px;
 }
 
-/* ── Grids ── */
+/* ─────────────────────────────────────────────
+   GRIDS
+───────────────────────────────────────────── */
 .grid-3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
 }
 
-/* ── Skeleton loading ── */
+/* ─────────────────────────────────────────────
+   SKELETON LOADING
+───────────────────────────────────────────── */
 .skeleton {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -313,6 +338,7 @@ button:focus-visible {
   position: relative;
   overflow: hidden;
 }
+
 .skeleton::after {
   content: '';
   position: absolute;
@@ -320,6 +346,7 @@ button:focus-visible {
   background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 4%, transparent), transparent);
   animation: shimmer 1.6s infinite;
 }
+
 @keyframes shimmer {
   from { transform: translateX(-100%); }
   to { transform: translateX(100%); }
@@ -333,11 +360,14 @@ button:focus-visible {
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
+
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
 
-/* ── Responsive ── */
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
 @media (max-width: 992px) {
   .grid-3 {
     grid-template-columns: repeat(2, 1fr);
@@ -369,6 +399,4 @@ button:focus-visible {
   .page {
     padding-top: calc(var(--nav-height) + 24px);
   }
-}
-
 }
