@@ -17,8 +17,8 @@ import Scanner from './pages/Scanner'
 function ProtectedRoute({ children, role }) {
   const { user, loading } = useAuth()
   if (loading) return (
-    <div className="min-h-screen bg-bg-primary flex items-center justify-center">
-      <div className="w-8 h-8 border-2 border-purple-primary border-t-transparent rounded-full animate-spin" />
+    <div className="min-h-screen bg-bg flex items-center justify-center">
+      <div className="spinner" />
     </div>
   )
   if (!user) return <Navigate to="/login" />

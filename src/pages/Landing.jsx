@@ -1,274 +1,234 @@
-import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import { ArrowRight, Ticket, ShoppingBag, QrCode, BarChart3, Shield, Zap } from 'lucide-react'
 import Navbar from '../components/Navbar'
+import EventCard from '../components/EventCard'
 import { eventsAPI } from '../services/api'
 import { useQuery } from '@tanstack/react-query'
-import EventCard from '../components/EventCard'
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] },
+  }),
+}
 
 export default function Landing() {
   const { data: events } = useQuery({
     queryKey: ['events'],
-    queryFn: () => eventsAPI.list().then(r => r.data)
+    queryFn: () => eventsAPI.list().then((r) => r.data),
   })
 
-  const publishedEvents = events?.filter(e => e.status === 'published').slice(0, 3) || []
+  const published = events?.filter((e) => e.status === 'published').slice(0, 3) || []
+
+  const features = [
+    { icon: <Ticket size={22} />, title: 'Official ticketing', desc: 'Buy directly from organisers with guaranteed authenticity and instant QR delivery to your inbox.' },
+    { icon: <ShoppingBag size={22} />, title: 'Safe resale', desc: "Can't attend? List safely. Organisers set price caps so resale never becomes scalping." },
+    { icon: <QrCode size={22} />, title: 'QR check-in', desc: 'Fast gate entry with unique signed QR codes. Works on any mobile browser, offline included.' },
+    { icon: <Zap size={22} />, title: 'M-Pesa payments', desc: "Pay with M-Pesa STK Push — no cards, no friction, just enter your PIN and you're in." },
+    { icon: <BarChart3 size={22} />, title: 'Live analytics', desc: 'Real-time organiser dashboards: sales, revenue breakdowns, and gate check-in rates, live.' },
+    { icon: <Shield size={22} />, title: 'Fraud protected', desc: 'Atomic QR transfer — old codes die the instant a resale completes. Zero double entries.' },
+  ]
 
   return (
-    <div className="min-h-screen bg-[#0D0D1A]">
+    <div className="page" style={{ paddingTop: 0 }}>
       <Navbar />
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      {/* ── Hero — the one place we spend the accent boldly ── */}
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        <div
+          className="orb w-[560px] h-[560px] top-[-140px] left-[-120px]"
+          style={{ background: 'color-mix(in srgb, var(--color-accent) 22%, transparent)' }}
+        />
+        <div
+          className="orb w-[420px] h-[420px] bottom-[-100px] right-[-100px]"
+          style={{ background: 'color-mix(in srgb, var(--color-accent) 12%, transparent)' }}
+        />
 
-        {/* Animated background orbs */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#7C3AED]/20 rounded-full blur-3xl animate-[float_6s_ease-in-out_infinite]" />
-          <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-[#F97316]/20 rounded-full blur-3xl animate-[float_8s_ease-in-out_infinite_reverse]" />
-          <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-[#A855F7]/10 rounded-full blur-3xl animate-[float_10s_ease-in-out_infinite]" />
-        </div>
-
-        {/* Grid pattern overlay */}
-        <div className="absolute inset-0 opacity-10"
+        <div
+          className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `linear-gradient(rgba(124,58,237,0.3) 1px, transparent 1px),
-              linear-gradient(90deg, rgba(124,58,237,0.3) 1px, transparent 1px)`,
-            backgroundSize: '50px 50px'
+            backgroundImage:
+              'linear-gradient(var(--color-text) 1px,transparent 1px),linear-gradient(90deg,var(--color-text) 1px,transparent 1px)',
+            backgroundSize: '64px 64px',
           }}
         />
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 text-center">
-          {/* Badge */}
+        <div className="container relative z-10 py-32 text-center">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border border-[#7C3AED]/40 text-sm text-[#A855F7] mb-8"
+            variants={fadeUp} initial="hidden" animate="show" custom={0}
+            className="inline-flex items-center gap-2.5 badge badge-accent mb-9 text-[13px] px-4 py-2"
           >
-            <span className="w-2 h-2 bg-[#F97316] rounded-full animate-pulse" />
-            Kenya's #1 Hybrid Ticket Marketplace
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+            Kenya's hybrid ticket marketplace
           </motion.div>
 
-          {/* Main Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1 }}
-            className="text-6xl md:text-8xl lg:text-9xl font-black tracking-tighter leading-[0.9] mb-6"
+            variants={fadeUp} initial="hidden" animate="show" custom={1}
+            className="font-display font-bold text-[clamp(44px,7vw,96px)] leading-[0.98] tracking-[-0.03em] mb-7"
           >
-            <span className="text-white">Experience</span>
-            <br />
-            <span className="gradient-text">Events</span>
-            <br />
-            <span className="text-white">Differently</span>
+            <span className="text-text block">Experience events,</span>
+            <span className="text-accent block">without the friction</span>
           </motion.h1>
 
-          {/* Subheading */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-xl md:text-2xl text-[#A0A0B8] max-w-2xl mx-auto mb-10 leading-relaxed"
+            variants={fadeUp} initial="hidden" animate="show" custom={2}
+            className="text-lg text-text-secondary max-w-lg mx-auto mb-11 leading-relaxed"
           >
-            Buy, sell, and discover event tickets with M-Pesa payments, instant QR codes, and a safe resale marketplace.
+            Buy, sell, and discover event tickets with M-Pesa payments,
+            instant QR codes, and a fraud-proof resale marketplace.
           </motion.p>
 
-          {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex flex-wrap items-center justify-center gap-4"
+            variants={fadeUp} initial="hidden" animate="show" custom={3}
+            className="flex flex-wrap justify-center gap-3"
           >
             <Link to="/events">
-              <button className="btn-primary flex items-center gap-2 text-base px-8 py-4">
-                Explore Events
-                <ArrowRight size={18} />
+              <button className="btn-primary text-[15px] px-8 py-3.5">
+                Explore events
+                <ArrowRight size={17} />
               </button>
             </Link>
             <Link to="/register">
-              <button className="flex items-center gap-2 px-8 py-4 rounded-full border border-[#2A2A4A] text-white hover:border-[#7C3AED] transition-all text-base font-semibold">
-                Create Account
-              </button>
+              <button className="btn-ghost text-[15px] px-8 py-3.5">Create account</button>
             </Link>
           </motion.div>
 
-          {/* Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="mt-20 grid grid-cols-3 gap-8 max-w-lg mx-auto"
+            variants={fadeUp} initial="hidden" animate="show" custom={4}
+            className="mt-24 inline-grid grid-cols-3 gap-14"
           >
             {[
-              { value: '10K+', label: 'Tickets Sold' },
-              { value: '500+', label: 'Events' },
-              { value: '50K+', label: 'Happy Fans' },
-            ].map((stat, i) => (
+              { v: '10K+', l: 'Tickets sold' },
+              { v: '500+', l: 'Events hosted' },
+              { v: '50K+', l: 'Happy fans' },
+            ].map((s, i) => (
               <div key={i} className="text-center">
-                <p className="text-3xl font-black gradient-text">{stat.value}</p>
-                <p className="text-sm text-[#A0A0B8] mt-1">{stat.label}</p>
+                <p className="font-display font-bold text-3xl text-text">{s.v}</p>
+                <p className="text-[13px] text-text-muted mt-1.5 tracking-wide">{s.l}</p>
               </div>
             ))}
           </motion.div>
         </div>
+      </section>
 
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-[#2A2A4A] rounded-full flex justify-center pt-2">
-            <div className="w-1 h-2 bg-[#7C3AED] rounded-full" />
+      <div className="divider" />
+
+      {/* ── Features — quiet, uniform, no repeated gradients ── */}
+      <section className="section">
+        <div className="container">
+          <motion.div
+            variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <span className="eyebrow">Why EventSphere</span>
+            <h2 className="font-display font-bold text-[clamp(32px,4.5vw,52px)] text-text tracking-tight leading-tight">
+              Everything you need, nothing you don't
+            </h2>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+            {features.map((f, i) => (
+              <motion.div
+                key={i}
+                variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i * 0.4}
+                className="card p-7"
+              >
+                <div className="w-11 h-11 rounded-xl bg-accent/10 text-accent-hover flex items-center justify-center mb-5">
+                  {f.icon}
+                </div>
+                <h3 className="font-display font-semibold text-[17px] text-text mb-2">{f.title}</h3>
+                <p className="text-text-secondary leading-relaxed text-[14px]">{f.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 max-w-7xl mx-auto px-6">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-16"
-        >
-          <span className="text-[#F97316] text-sm font-semibold uppercase tracking-widest">Why EventSphere</span>
-          <h2 className="text-5xl font-black mt-3 text-white">Everything You Need</h2>
-          <p className="text-[#A0A0B8] mt-4 max-w-xl mx-auto">One platform for buying, selling, and managing event tickets across Kenya</p>
-        </motion.div>
+      <div className="divider" />
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {[
-            {
-              icon: <Ticket size={28} />,
-              title: 'Official Ticketing',
-              desc: 'Buy tickets directly from organisers with guaranteed authenticity and instant QR code delivery.',
-              color: '#7C3AED'
-            },
-            {
-              icon: <ShoppingBag size={28} />,
-              title: 'Safe Resale',
-              desc: 'Can\'t make it? List your ticket safely. Organisers set price caps to prevent scalping.',
-              color: '#F97316'
-            },
-            {
-              icon: <QrCode size={28} />,
-              title: 'QR Check-in',
-              desc: 'Lightning-fast gate entry with unique QR codes. Works offline on any mobile device.',
-              color: '#7C3AED'
-            },
-            {
-              icon: <Zap size={28} />,
-              title: 'M-Pesa Payments',
-              desc: 'Pay instantly with M-Pesa STK Push. No cards, no hassle — just enter your PIN.',
-              color: '#F97316'
-            },
-            {
-              icon: <BarChart3 size={28} />,
-              title: 'Live Analytics',
-              desc: 'Organisers get real-time dashboards showing sales, revenue, and check-in rates.',
-              color: '#7C3AED'
-            },
-            {
-              icon: <Shield size={28} />,
-              title: 'Fraud Protected',
-              desc: 'Atomic ownership transfer means old QR codes are instantly invalidated on resale.',
-              color: '#F97316'
-            },
-          ].map((feature, i) => (
+      {/* ── Upcoming Events ── */}
+      {published.length > 0 && (
+        <section className="section">
+          <div className="container">
             <motion.div
-              key={i}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.1 }}
-              className="card p-6"
+              variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+              className="flex items-end justify-between mb-12"
             >
-              <div
-                className="w-14 h-14 rounded-2xl flex items-center justify-center mb-5"
-                style={{ backgroundColor: `${feature.color}20`, color: feature.color }}
-              >
-                {feature.icon}
-              </div>
-              <h3 className="text-xl font-bold text-white mb-2">{feature.title}</h3>
-              <p className="text-[#A0A0B8] text-sm leading-relaxed">{feature.desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Upcoming Events Section */}
-      {publishedEvents.length > 0 && (
-        <section className="py-24 bg-[#13132B]">
-          <div className="max-w-7xl mx-auto px-6">
-            <div className="flex items-center justify-between mb-12">
               <div>
-                <span className="text-[#F97316] text-sm font-semibold uppercase tracking-widest">Happening Soon</span>
-                <h2 className="text-4xl font-black text-white mt-2">Upcoming Events</h2>
+                <span className="eyebrow">Happening soon</span>
+                <h2 className="font-display font-bold text-[clamp(28px,4vw,44px)] text-text tracking-tight">
+                  Upcoming events
+                </h2>
               </div>
               <Link to="/events">
-                <button className="flex items-center gap-2 text-[#A855F7] hover:text-white transition-colors text-sm font-medium">
-                  View All
-                  <ArrowRight size={16} />
+                <button className="btn-ghost py-2.5 px-5 text-sm flex items-center gap-2">
+                  View all
+                  <ArrowRight size={15} />
                 </button>
               </Link>
-            </div>
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {publishedEvents.map(event => (
-                <EventCard key={event.id} event={event} />
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {published.map((event, i) => (
+                <motion.div
+                  key={event.id}
+                  variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i * 0.4}
+                >
+                  <EventCard event={event} />
+                </motion.div>
               ))}
             </div>
           </div>
         </section>
       )}
 
-      {/* CTA Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#7C3AED]/20 to-[#F97316]/20" />
-        </div>
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-          >
-            <h2 className="text-5xl md:text-6xl font-black text-white mb-6">
-              Ready to Experience
-              <br />
-              <span className="gradient-text">Something Amazing?</span>
+      <div className="divider" />
+
+      {/* ── CTA ── */}
+      <section className="section relative overflow-hidden">
+        <div
+          className="orb w-[440px] h-[440px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+          style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
+        />
+        <div className="container relative z-10 text-center">
+          <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
+            <span className="eyebrow">Join thousands</span>
+            <h2 className="font-display font-bold text-[clamp(32px,4.5vw,56px)] text-text tracking-tight leading-tight mb-5">
+              Ready to experience something amazing?
             </h2>
-            <p className="text-[#A0A0B8] text-xl mb-10">
-              Join thousands of event-goers across Kenya
+            <p className="text-text-secondary mb-10 max-w-md mx-auto">
+              Join the community of event-goers and organisers across Kenya.
             </p>
-            <div className="flex flex-wrap justify-center gap-4">
+            <div className="flex flex-wrap justify-center gap-3">
               <Link to="/register">
-                <button className="btn-primary text-base px-8 py-4">
-                  Get Started Free
-                </button>
+                <button className="btn-primary text-[15px] px-8 py-3.5">Get started free</button>
               </Link>
               <Link to="/events">
-                <button className="btn-orange text-base px-8 py-4">
-                  Browse Events
-                </button>
+                <button className="btn-ghost text-[15px] px-8 py-3.5">Browse events</button>
               </Link>
             </div>
           </motion.div>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-[#13132B] border-t border-[#2A2A4A] py-12">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C3AED] to-[#F97316] flex items-center justify-center">
-                <Ticket size={16} className="text-white" />
+      {/* ── Footer ── */}
+      <footer className="border-t border-border">
+        <div className="container py-10">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <Link to="/" className="flex items-center gap-2.5">
+              <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center">
+                <Ticket size={13} className="text-white" />
               </div>
-              <span className="text-xl font-black gradient-text">EventSphere</span>
-            </div>
-            <p className="text-[#A0A0B8] text-sm">© 2026 EventSphere. All rights reserved.</p>
-            <div className="flex gap-6 text-[#A0A0B8] text-sm">
-              <a href="#" className="hover:text-white transition-colors">Privacy</a>
-              <a href="#" className="hover:text-white transition-colors">Terms</a>
+              <span className="font-display font-bold text-text">EventSphere</span>
+            </Link>
+            <p className="text-sm text-text-muted">© 2026 EventSphere. All rights reserved.</p>
+            <div className="flex gap-7 text-sm text-text-muted">
+              <a href="#" className="hover:text-text transition-colors">Privacy</a>
+              <a href="#" className="hover:text-text transition-colors">Terms</a>
+              <Link to="/events" className="hover:text-text transition-colors">Events</Link>
             </div>
           </div>
         </div>
