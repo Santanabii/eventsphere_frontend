@@ -40,9 +40,7 @@ export default function Events() {
         <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
           <div className="relative flex-1">
             <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
-            <label htmlFor="event-search" className="sr-only">Search events or venues</label>
             <input
-              id="event-search"
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -71,19 +69,12 @@ export default function Events() {
       <div className="container pb-24">
         {isLoading ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => (
-              <div key={i} className="skeleton h-[340px]" />
-            ))}
+            {[...Array(6)].map((_, i) => <div key={i} className="skeleton h-[340px]" />)}
           </div>
         ) : filtered.length > 0 ? (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filtered.map((event, i) => (
-              <motion.div
-                key={event.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.05 }}
-              >
+              <motion.div key={event.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
                 <EventCard event={event} />
               </motion.div>
             ))}

@@ -73,17 +73,8 @@ export default function EventDetail() {
     hour: '2-digit', minute: '2-digit'
   })
 
-  if (isLoading) return (
-    <div className="min-h-screen bg-bg flex items-center justify-center">
-      <div className="spinner" />
-    </div>
-  )
-
-  if (!event) return (
-    <div className="min-h-screen bg-bg flex items-center justify-center">
-      <p className="text-text-secondary text-lg">Event not found</p>
-    </div>
-  )
+  if (isLoading) return <div className="min-h-screen bg-bg flex items-center justify-center"><div className="spinner" /></div>
+  if (!event) return <div className="min-h-screen bg-bg flex items-center justify-center"><p className="text-text-secondary text-lg">Event not found</p></div>
 
   return (
     <div className="min-h-screen bg-bg">

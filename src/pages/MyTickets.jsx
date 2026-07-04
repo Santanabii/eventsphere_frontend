@@ -54,8 +54,7 @@ export default function MyTickets() {
   return (
     <div className="page">
       <Navbar />
-
-      <div className="container max-w-4xl pb-24">
+     <div className="container max-w-4xl pb-24">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-12">
             <span className="eyebrow">Your collection</span>

@@ -34,7 +34,7 @@ export default function Landing() {
 
   return (
     <div className="page" style={{ paddingTop: 0 }}>
-      <Navbar />
+      <Navbar/>
 
       {/* ── Hero ── */}
       <section className="relative min-h-[calc(100vh-72px)] flex items-center justify-center overflow-hidden">
