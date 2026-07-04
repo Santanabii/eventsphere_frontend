@@ -30,22 +30,24 @@ export default function Events() {
         <motion.div
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          className="text-center max-w-2xl mx-auto mb-16"
+          className="text-center mb-10"
         >
           <span className="eyebrow">Discover</span>
-          <h1 className="font-display font-bold text-5xl md:text-6xl text-text mb-3">All events</h1>
-          <p className="text-text-secondary text-lg">Find your next unforgettable experience</p>
+          <h1 className="font-display font-bold text-3xl text-text">All events</h1>
+          <p className="text-text-secondary mt-2">Find your next unforgettable experience</p>
         </motion.div>
 
-        <div className="flex flex-col sm:flex-row gap-4 max-w-2xl mx-auto">
+        <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto">
           <div className="relative flex-1">
-            <Search size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+            <label htmlFor="event-search" className="sr-only">Search events or venues</label>
             <input
+              id="event-search"
               type="text"
               value={search}
               onChange={e => setSearch(e.target.value)}
               placeholder="Search events or venues..."
-              className="input pl-12 py-3.5"
+              className="input pl-11"
             />
           </div>
           <div className="flex gap-2">
@@ -53,10 +55,10 @@ export default function Events() {
               <button
                 key={f}
                 onClick={() => setFilter(f)}
-                className={`px-7 py-3.5 rounded-xl text-sm font-medium capitalize transition-all ${
+                className={`px-5 py-3 rounded-xl text-sm font-medium capitalize transition-colors ${
                   filter === f
-                    ? 'bg-accent text-white shadow-lg shadow-accent/25'
-                    : 'bg-surface border border-border text-text-secondary hover:border-border-strong hover:text-text'
+                    ? 'bg-accent text-white'
+                    : 'bg-surface border border-border text-text-secondary hover:border-border-strong'
                 }`}
               >
                 {f === 'all' ? 'All' : 'Published'}
@@ -68,24 +70,31 @@ export default function Events() {
 
       <div className="container pb-24">
         {isLoading ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[...Array(6)].map((_, i) => <div key={i} className="skeleton h-[340px]" />)}
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="skeleton h-72" />
+            ))}
           </div>
         ) : filtered.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
             {filtered.map((event, i) => (
-              <motion.div key={event.id} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.05 }}>
+              <motion.div
+                key={event.id}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.04 }}
+              >
                 <EventCard event={event} />
               </motion.div>
             ))}
           </div>
         ) : (
-          <div className="text-center py-32 card">
-            <div className="w-24 h-24 rounded-full bg-surface border border-border flex items-center justify-center mx-auto mb-6">
-              <Search size={36} className="text-text-muted" />
+          <div className="text-center py-20">
+            <div className="w-16 h-16 rounded-full bg-surface border border-border flex items-center justify-center mx-auto mb-4">
+              <Search size={26} className="text-text-muted" />
             </div>
-            <p className="text-text text-2xl font-medium">No events found</p>
-            <p className="text-text-muted mt-2">Try adjusting your search or filters</p>
+            <p className="text-text text-lg font-medium">No events found</p>
+            <p className="text-text-muted text-sm mt-1">Try adjusting your search</p>
           </div>
         )}
       </div>

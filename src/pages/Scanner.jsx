@@ -15,7 +15,7 @@ export default function Scanner() {
 
     const scanner = new Html5QrcodeScanner('qr-reader', {
       fps: 10,
-      qrbox: { width: 280, height: 280 },
+      qrbox: { width: 250, height: 250 },
     })
 
     scanner.render(
@@ -46,25 +46,22 @@ export default function Scanner() {
 
   const resultConfig = {
     valid: {
-      icon: <CheckCircle size={72} />,
+      icon: <CheckCircle size={56} />,
       className: 'text-success',
       border: 'border-success/30',
-      title: 'Valid ticket',
-      bg: 'bg-success/5'
+      title: 'Valid ticket'
     },
     used: {
-      icon: <AlertCircle size={72} />,
+      icon: <AlertCircle size={56} />,
       className: 'text-warning',
       border: 'border-warning/30',
-      title: 'Already used',
-      bg: 'bg-warning/5'
+      title: 'Already used'
     },
     invalid: {
-      icon: <XCircle size={72} />,
+      icon: <XCircle size={56} />,
       className: 'text-danger',
       border: 'border-danger/30',
-      title: 'Invalid ticket',
-      bg: 'bg-danger/5'
+      title: 'Invalid ticket'
     }
   }
 
@@ -80,33 +77,33 @@ export default function Scanner() {
           animate={{ opacity: 1, y: 0 }}
           className="text-center"
         >
-          <div className="mb-12">
-            <div className="w-20 h-20 rounded-2xl bg-accent/10 flex items-center justify-center mx-auto mb-4">
-              <QrCode size={36} className="text-accent" />
+          <div className="mb-8">
+            <div className="w-14 h-14 rounded-[20px] bg-accent/10 flex items-center justify-center mx-auto mb-4">
+              <QrCode size={28} className="text-accent" />
             </div>
-            <h1 className="font-display font-bold text-4xl text-text">Gate scanner</h1>
-            <p className="text-text-secondary text-lg mt-2">Scan attendee QR codes for entry</p>
+            <h1 className="font-display font-bold text-3xl text-text">Gate scanner</h1>
+            <p className="text-text-secondary mt-1.5">Scan attendee QR codes for entry</p>
           </div>
 
           {scanning && !result && (
-            <div className="glass rounded-2xl overflow-hidden border border-border p-4">
+            <div className="glass rounded-[20px] overflow-hidden">
               <div id="qr-reader" className="w-full" />
             </div>
           )}
 
           {result && config && (
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
+              initial={{ opacity: 0, scale: 0.94 }}
               animate={{ opacity: 1, scale: 1 }}
-              className={`glass rounded-2xl p-8 md:p-10 border ${config.border} ${config.bg}`}
+              className={`glass rounded-[20px] p-8 border ${config.border}`}
             >
               <div className={`flex justify-center mb-4 ${config.className}`}>
                 {config.icon}
               </div>
-              <h2 className="font-display font-bold text-3xl text-text mb-4">{config.title}</h2>
+              <h2 className="font-display font-bold text-xl text-text mb-4">{config.title}</h2>
 
               {result.owner && (
-                <div className="space-y-2.5 mb-8 text-left bg-bg-soft rounded-xl p-5 border border-border">
+                <div className="space-y-2 mb-6 text-left bg-bg-soft rounded-xl p-4">
                   <div className="flex justify-between text-sm">
                     <span className="text-text-secondary">Attendee</span>
                     <span className="text-text font-medium">{result.owner}</span>
@@ -132,7 +129,7 @@ export default function Scanner() {
                 </div>
               )}
 
-              <button onClick={reset} className="btn-primary w-full py-4.5 text-[16px]">
+              <button onClick={reset} className="btn-primary w-full">
                 Scan next ticket
               </button>
             </motion.div>

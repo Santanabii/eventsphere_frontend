@@ -41,10 +41,9 @@ export default function Analytics() {
   const tooltipStyle = {
     backgroundColor: '#131319',
     border: '1px solid #2A2A36',
-    borderRadius: '12px',
+    borderRadius: '10px',
     color: '#EDEDF2',
-    fontSize: '13px',
-    padding: '14px 18px',
+    fontSize: '13px'
   }
 
   return (
@@ -54,48 +53,45 @@ export default function Analytics() {
       <div className="container pb-24">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
 
-          <div className="flex items-center justify-between mb-16 flex-wrap gap-4">
+          <div className="flex items-center justify-between mb-10 flex-wrap gap-4">
             <div>
               <span className="eyebrow">Live dashboard</span>
-              <h1 className="font-display font-bold text-4xl md:text-5xl text-text mb-1">
-                {displayData?.event_title}
-              </h1>
-              <p className="text-text-secondary text-lg">Real-time performance metrics</p>
+              <h1 className="font-display font-bold text-3xl text-text">{displayData?.event_title}</h1>
             </div>
-            <div className="flex items-center gap-3 glass px-6 py-3 rounded-full border border-success/20">
-              <Wifi size={16} className="text-success animate-pulse" />
-              <span className="text-sm text-success font-medium">Live</span>
+            <div className="flex items-center gap-2 glass px-4 py-2 rounded-full">
+              <Wifi size={14} className="text-success" />
+              <span className="text-sm text-success">Live</span>
             </div>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-7 mb-10">
             {[
-              { label: 'Total sold', value: displayData?.total_sold || 0, sub: `of ${displayData?.total_capacity || 0}`, icon: <Ticket size={22} /> },
-              { label: 'Revenue', value: `KES ${(displayData?.total_revenue || 0).toLocaleString()}`, sub: 'Total earnings', icon: <DollarSign size={22} /> },
-              { label: 'Checked in', value: displayData?.checked_in || 0, sub: `of ${displayData?.total_sold || 0} sold`, icon: <Users size={22} /> },
-              { label: 'Check-in rate', value: `${displayData?.checkin_rate || 0}%`, sub: 'Gate entry rate', icon: <TrendingUp size={22} /> },
+              { label: 'Total sold', value: displayData?.total_sold || 0, sub: `of ${displayData?.total_capacity || 0}`, icon: <Ticket size={18} /> },
+              { label: 'Revenue', value: `KES ${(displayData?.total_revenue || 0).toLocaleString()}`, sub: 'Total earnings', icon: <DollarSign size={18} /> },
+              { label: 'Checked in', value: displayData?.checked_in || 0, sub: `of ${displayData?.total_sold || 0} sold`, icon: <Users size={18} /> },
+              { label: 'Check-in rate', value: `${displayData?.checkin_rate || 0}%`, sub: 'Gate entry rate', icon: <TrendingUp size={18} /> },
             ].map((metric, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.06 }}
-                className="card p-6 hover:-translate-y-0.5 transition-all"
+                className="card p-5"
               >
-                <div className="w-12 h-12 rounded-xl bg-accent/10 text-accent-hover flex items-center justify-center mb-4">
+                <div className="w-9 h-9 rounded-lg bg-accent/10 text-accent-hover flex items-center justify-center mb-4">
                   {metric.icon}
                 </div>
                 <p className="font-display font-bold text-2xl text-text">{metric.value}</p>
-                <p className="text-sm text-text-secondary mt-1">{metric.label}</p>
-                <p className="text-xs text-text-muted mt-0.5">{metric.sub}</p>
+                <p className="text-xs text-text-secondary mt-1">{metric.label}</p>
+                <p className="text-xs text-text-muted">{metric.sub}</p>
               </motion.div>
             ))}
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-6">
+          <div className="grid lg:grid-cols-2 gap-7">
             <div className="card p-6">
-              <h3 className="font-display font-semibold text-xl text-text mb-6">Revenue by tier</h3>
-              <ResponsiveContainer width="100%" height={260}>
+              <h3 className="font-display font-semibold text-text mb-6">Revenue by tier</h3>
+              <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={displayData?.tier_breakdown || []}>
                   <XAxis dataKey="name" tick={{ fill: '#8E8E9C', fontSize: 12 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: '#8E8E9C', fontSize: 12 }} axisLine={false} tickLine={false} />
@@ -106,8 +102,8 @@ export default function Analytics() {
             </div>
 
             <div className="card p-6">
-              <h3 className="font-display font-semibold text-xl text-text mb-6">Sold vs remaining</h3>
-              <ResponsiveContainer width="100%" height={260}>
+              <h3 className="font-display font-semibold text-text mb-6">Sold vs remaining</h3>
+              <ResponsiveContainer width="100%" height={220}>
                 <BarChart data={displayData?.tier_breakdown || []}>
                   <XAxis dataKey="name" tick={{ fill: '#8E8E9C', fontSize: 12 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: '#8E8E9C', fontSize: 12 }} axisLine={false} tickLine={false} />
@@ -119,18 +115,16 @@ export default function Analytics() {
             </div>
           </div>
 
-          <div className="card mt-6 overflow-hidden">
+          <div className="card mt-5 overflow-hidden">
             <div className="p-6 border-b border-border">
-              <h3 className="font-display font-semibold text-xl text-text">Tier breakdown</h3>
+              <h3 className="font-display font-semibold text-text">Tier breakdown</h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full">
                 <thead>
                   <tr className="border-b border-border">
                     {['Tier', 'Price', 'Quantity', 'Sold', 'Remaining', 'Revenue'].map(h => (
-                      <th key={h} className="px-6 py-4 text-left text-xs text-text-muted uppercase tracking-wider font-semibold">
-                        {h}
-                      </th>
+                      <th key={h} className="px-6 py-3 text-left text-xs text-text-muted uppercase tracking-wider">{h}</th>
                     ))}
                   </tr>
                 </thead>

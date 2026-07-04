@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Mail, Lock, Eye, EyeOff, Ticket } from 'lucide-react'
+import { Mail, Lock, Eye, EyeOff } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
+import Logo from '../components/Logo'
 
 export default function Login() {
   const { login } = useAuth()
@@ -29,40 +30,36 @@ export default function Login() {
   }
 
   return (
-    <div className="min-h-screen bg-bg flex items-center justify-center px-6 py-16 relative overflow-hidden">
+    <div
+      className="min-h-screen bg-bg flex items-center justify-center px-6 relative overflow-hidden"
+      style={{ paddingTop: 'var(--nav-height)' }}
+    >
       <div
-        className="orb w-96 h-96 top-1/3 left-1/4"
+        className="orb w-64 h-64 top-1/3 left-1/4"
         style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
-      />
-      <div
-        className="orb w-72 h-72 bottom-1/4 right-1/4"
-        style={{ background: 'color-mix(in srgb, var(--color-accent) 8%, transparent)' }}
       />
 
       <motion.div
-        initial={{ opacity: 0, y: 24 }}
+        initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.4 }}
         className="relative z-10 w-full max-w-md"
       >
-        <div className="text-center mb-12">
-          <Link to="/" className="inline-flex items-center gap-3">
-            <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center">
-              <Ticket size={20} className="text-white" />
-            </div>
-            <span className="text-2xl font-display font-bold text-text">EventSphere</span>
+        <div className="text-center mb-8">
+          <Link to="/" className="inline-flex items-center gap-2.5">
+            <Logo />
           </Link>
-          <h1 className="font-display font-bold text-4xl text-text mt-8">Welcome back</h1>
-          <p className="text-text-secondary mt-2 text-base">Sign in to your account</p>
+          <h1 className="font-display font-bold text-2xl text-text mt-6">Welcome back</h1>
+          <p className="text-text-secondary mt-1.5 text-sm">Sign in to your account</p>
         </div>
 
-        <div className="glass rounded-2xl p-8 md:p-10">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="glass rounded-[20px] p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
 
             <div>
               <label htmlFor="email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="email"
                   type="email"
@@ -70,7 +67,7 @@ export default function Login() {
                   onChange={e => setForm({ ...form, email: e.target.value })}
                   placeholder="you@example.com"
                   required
-                  className="input pl-12 py-3.5"
+                  className="input pl-11"
                 />
               </div>
             </div>
@@ -78,7 +75,7 @@ export default function Login() {
             <div>
               <label htmlFor="password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
                 <input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
@@ -86,7 +83,7 @@ export default function Login() {
                   onChange={e => setForm({ ...form, password: e.target.value })}
                   placeholder="••••••••"
                   required
-                  className="input pl-12 pr-12 py-3.5"
+                  className="input pl-11 pr-11"
                 />
                 <button
                   type="button"
@@ -94,7 +91,7 @@ export default function Login() {
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
                   className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text transition-colors"
                 >
-                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
@@ -102,7 +99,7 @@ export default function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-4.5 text-[16px]"
+              className="btn-primary w-full py-3 text-[15px]"
             >
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -113,7 +110,7 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="text-center text-text-secondary text-sm mt-8">
+          <p className="text-center text-text-secondary text-sm mt-6">
             Don't have an account?{' '}
             <Link to="/register" className="text-accent-hover hover:text-text transition-colors font-medium">
               Sign up
