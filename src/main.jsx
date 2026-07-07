@@ -17,9 +17,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           position="top-right"
           toastOptions={{
             style: {
-              background: '#131319',
-              color: '#EDEDF2',
-              border: '1px solid #1E1E27',
+              background: '#18181b',
+              color: '#f4f4f5',
+              border: '1px solid #27272a',
               fontSize: '14px',
             },
           }}

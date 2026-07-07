@@ -5,21 +5,13 @@ import { Menu, X, LogOut, User } from 'lucide-react'
 import toast from 'react-hot-toast'
 import Logo from './Logo'
 
+
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
   const location = useLocation()
   const [open, setOpen] = useState(false)
-  const [scrolled, setScrolled] = useState(false)
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
-
-  // Close the mobile drawer on route change
   useEffect(() => { setOpen(false) }, [location.pathname])
 
   const handleLogout = async () => {
@@ -40,27 +32,20 @@ export default function Navbar() {
   ]
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-        scrolled ? 'glass' : 'bg-transparent border-b border-transparent'
-      }`}
-      style={{ height: 'var(--nav-height)' }}
-    >
-      <div className="container h-full flex items-center justify-between">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-20 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900">
+      <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between">
 
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-2.5 group">
+        <Link to="/" className="flex items-center gap-2.5">
           <Logo />
         </Link>
 
-        {/* Desktop links */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map(link => (
             <Link
               key={link.to}
               to={link.to}
-              className={`text-[14px] transition-colors ${
-                isActive(link.to) ? 'text-text font-medium' : 'text-text-secondary hover:text-text'
+              className={`text-sm transition-colors ${
+                isActive(link.to) ? 'text-zinc-100 font-medium' : 'text-zinc-400 hover:text-zinc-100'
               }`}
             >
               {link.label}
@@ -68,21 +53,20 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Desktop auth */}
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
-              <div className="flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-surface border border-border">
-                <div className="w-6 h-6 rounded-full bg-accent flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
+                <div className="w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center flex-shrink-0">
                   <User size={12} className="text-white" />
                 </div>
-                <span className="text-sm text-text font-medium">{user.username}</span>
-                <span className="text-xs text-text-muted capitalize">· {user.role}</span>
+                <span className="text-sm text-zinc-100 font-medium">{user.username}</span>
+                <span className="text-xs text-zinc-500 capitalize">· {user.role}</span>
               </div>
               <button
                 onClick={handleLogout}
                 aria-label="Log out"
-                className="flex items-center gap-2 text-sm text-text-secondary hover:text-text transition-colors px-2"
+                className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors px-2"
               >
                 <LogOut size={15} />
               </button>
@@ -99,9 +83,8 @@ export default function Navbar() {
           )}
         </div>
 
-        {/* Mobile toggle */}
         <button
-          className="md:hidden text-text p-2"
+          className="md:hidden text-zinc-100 p-2"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -110,25 +93,21 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
       {open && (
-        <div className="md:hidden glass border-t border-border">
-          <div className="container py-6 flex flex-col gap-5">
+        <div className="md:hidden bg-zinc-950 border-t border-zinc-900">
+          <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-5">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-[15px] ${isActive(link.to) ? 'text-text font-medium' : 'text-text-secondary'}`}
+                className={`text-[15px] ${isActive(link.to) ? 'text-zinc-100 font-medium' : 'text-zinc-400'}`}
               >
                 {link.label}
               </Link>
             ))}
             <div className="divider" />
             {user ? (
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 text-sm text-text-secondary"
-              >
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-zinc-400">
                 <LogOut size={15} />
                 Log out
               </button>

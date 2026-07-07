@@ -9,10 +9,7 @@ import Logo from '../components/Logo'
 export default function Register() {
   const { register } = useAuth()
   const navigate = useNavigate()
-  const [form, setForm] = useState({
-    email: '', username: '', password: '',
-    phone_number: '', role: 'attendee'
-  })
+  const [form, setForm] = useState({ email: '', username: '', password: '', phone_number: '', role: 'attendee' })
   const [showPassword, setShowPassword] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -25,56 +22,40 @@ export default function Register() {
       navigate('/login')
     } catch (err) {
       const errors = err.response?.data
-      if (errors) {
-        Object.values(errors).forEach(msg => toast.error(Array.isArray(msg) ? msg[0] : msg))
-      } else {
-        toast.error('Registration failed')
-      }
+      if (errors) Object.values(errors).forEach(msg => toast.error(Array.isArray(msg) ? msg[0] : msg))
+      else toast.error('Registration failed')
     } finally {
       setLoading(false)
     }
   }
 
   return (
-    <div
-      className="min-h-screen bg-bg flex items-center justify-center px-6 py-16 relative overflow-hidden"
-      style={{ paddingTop: 'calc(var(--nav-height) + 32px)' }}
-    >
-      <div
-        className="orb w-64 h-64 top-1/3 right-1/4"
-        style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
-      />
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-6 pt-20">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+        className="w-full max-w-md py-16">
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="relative z-10 w-full max-w-md"
-      >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5">
             <Logo />
           </Link>
-          <h1 className="font-display font-bold text-2xl text-text mt-6">Create account</h1>
-          <p className="text-text-secondary mt-1.5 text-sm">Join Kenya's hybrid event platform</p>
+          <h1 className="font-display font-bold text-2xl text-zinc-100 mt-6">Create account</h1>
+          <p className="text-zinc-400 mt-1.5 text-sm">Join Kenya's hybrid event platform</p>
         </div>
 
-        <div className="glass rounded-[20px] p-8">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="card p-8">
+          <form onSubmit={handleSubmit} className="space-y-5">
 
             <fieldset>
               <legend className="field-label">I am a...</legend>
               <div className="grid grid-cols-2 gap-3">
                 {['attendee', 'organiser'].map(role => (
                   <button
-                    key={role}
-                    type="button"
-                    onClick={() => setForm({ ...form, role })}
+                    key={role} type="button" onClick={() => setForm({ ...form, role })}
                     aria-pressed={form.role === role}
-                    className={`py-3 rounded-xl border text-sm font-medium capitalize transition-colors ${
+                    className={`py-3 rounded-lg border text-sm font-medium capitalize transition-colors ${
                       form.role === role
-                        ? 'border-accent bg-accent/10 text-accent-hover'
-                        : 'border-border text-text-secondary hover:border-border-strong'
+                        ? 'border-violet-500 bg-violet-500/10 text-violet-400'
+                        : 'border-zinc-800 text-zinc-400 hover:border-zinc-700'
                     }`}
                   >
                     {role}
@@ -86,15 +67,11 @@ export default function Register() {
             <div>
               <label htmlFor="username" className="field-label">Username</label>
               <div className="relative">
-                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="username"
-                  type="text"
-                  value={form.username}
+                  id="username" type="text" value={form.username}
                   onChange={e => setForm({ ...form, username: e.target.value })}
-                  placeholder="johndoe"
-                  required
-                  className="input pl-11"
+                  placeholder="johndoe" required className="input input-icon-l"
                 />
               </div>
             </div>
@@ -102,15 +79,11 @@ export default function Register() {
             <div>
               <label htmlFor="reg-email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="reg-email"
-                  type="email"
-                  value={form.email}
+                  id="reg-email" type="email" value={form.email}
                   onChange={e => setForm({ ...form, email: e.target.value })}
-                  placeholder="you@example.com"
-                  required
-                  className="input pl-11"
+                  placeholder="you@example.com" required className="input input-icon-l"
                 />
               </div>
             </div>
@@ -118,14 +91,11 @@ export default function Register() {
             <div>
               <label htmlFor="reg-phone" className="field-label">Phone number</label>
               <div className="relative">
-                <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="reg-phone"
-                  type="tel"
-                  value={form.phone_number}
+                  id="reg-phone" type="tel" value={form.phone_number}
                   onChange={e => setForm({ ...form, phone_number: e.target.value })}
-                  placeholder="0712345678"
-                  className="input pl-11"
+                  placeholder="0712345678" className="input input-icon-l"
                 />
               </div>
             </div>
@@ -133,32 +103,24 @@ export default function Register() {
             <div>
               <label htmlFor="reg-password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="reg-password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={form.password}
+                  id="reg-password" type={showPassword ? 'text' : 'password'} value={form.password}
                   onChange={e => setForm({ ...form, password: e.target.value })}
-                  placeholder="Min. 8 characters"
-                  required
-                  className="input pl-11 pr-11"
+                  placeholder="Min. 8 characters" required
+                  className="input input-icon-l input-icon-r"
                 />
                 <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  type="button" onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-100"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full py-3 text-[15px]"
-            >
+            <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-[15px]">
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -168,11 +130,9 @@ export default function Register() {
             </button>
           </form>
 
-          <p className="text-center text-text-secondary text-sm mt-6">
+          <p className="text-center text-zinc-400 text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-accent-hover hover:text-text transition-colors font-medium">
-              Sign in
-            </Link>
+            <Link to="/login" className="text-violet-400 hover:text-zinc-100 transition-colors font-medium">Sign in</Link>
           </p>
         </div>
       </motion.div>

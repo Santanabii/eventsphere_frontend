@@ -11,35 +11,29 @@ const productLinks = [
 
 const companyLinks = ['About', 'Contact', 'Careers']
 const legalLinks = ['Privacy policy', 'Terms of service', 'Refund policy']
-
-const socials = [
-  { icon: Instagram, label: 'Instagram' },
-  { icon: Twitter, label: 'X (Twitter)' },
-  { icon: Facebook, label: 'Facebook' },
-]
+const socials = [Instagram, Twitter, Facebook]
 
 export default function Footer() {
   return (
-    <footer className="border-t border-border">
-      <div className="container py-16">
+    <footer className="border-t border-zinc-900">
+      <div className="max-w-6xl mx-auto px-6 py-16">
         <div className="grid md:grid-cols-[1.3fr_1fr_1fr_1fr] gap-10 mb-14">
 
-          {/* Brand column */}
           <div>
             <Link to="/" className="flex items-center gap-2.5 w-fit">
-              <Logo size={30} textClassName="text-base" />
+              <Logo size={30} textSize="text-base" />
             </Link>
-            <p className="text-text-secondary text-sm leading-relaxed mt-4 max-w-xs">
+            <p className="text-zinc-400 text-sm leading-relaxed mt-4 max-w-xs">
               Kenya's hybrid ticket marketplace — buy, sell, and discover
               events with M-Pesa payments and fraud-proof resale.
             </p>
             <div className="flex items-center gap-2.5 mt-6">
-              {socials.map(({ icon: Icon, label }) => (
+              {socials.map((Icon, i) => (
                 <a
-                  key={label}
+                  key={i}
                   href="#"
-                  aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-surface border border-border flex items-center justify-center text-text-secondary hover:text-text hover:border-border-strong transition-colors"
+                  aria-label="Social link"
+                  className="w-9 h-9 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center text-zinc-400 hover:text-zinc-100 hover:border-zinc-700 transition-colors"
                 >
                   <Icon size={15} />
                 </a>
@@ -47,13 +41,12 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Product */}
           <div>
-            <p className="text-text text-sm font-semibold mb-4">Product</p>
+            <p className="text-zinc-100 text-sm font-semibold mb-4">Product</p>
             <ul className="space-y-3">
               {productLinks.map((link) => (
                 <li key={link.label}>
-                  <Link to={link.to} className="text-sm text-text-secondary hover:text-text transition-colors">
+                  <Link to={link.to} className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -61,29 +54,23 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Company */}
           <div>
-            <p className="text-text text-sm font-semibold mb-4">Company</p>
+            <p className="text-zinc-100 text-sm font-semibold mb-4">Company</p>
             <ul className="space-y-3">
               {companyLinks.map((label) => (
                 <li key={label}>
-                  <a href="#" className="text-sm text-text-secondary hover:text-text transition-colors">
-                    {label}
-                  </a>
+                  <a href="#" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">{label}</a>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Legal */}
           <div>
-            <p className="text-text text-sm font-semibold mb-4">Legal</p>
+            <p className="text-zinc-100 text-sm font-semibold mb-4">Legal</p>
             <ul className="space-y-3">
               {legalLinks.map((label) => (
                 <li key={label}>
-                  <a href="#" className="text-sm text-text-secondary hover:text-text transition-colors">
-                    {label}
-                  </a>
+                  <a href="#" className="text-sm text-zinc-400 hover:text-zinc-100 transition-colors">{label}</a>
                 </li>
               ))}
             </ul>
@@ -93,10 +80,8 @@ export default function Footer() {
         <div className="divider mb-8" />
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-3">
-          <p className="text-sm text-text-muted">
-            © {new Date().getFullYear()} EventSphere. All rights reserved.
-          </p>
-          <p className="text-sm text-text-muted">Made in Nairobi, Kenya</p>
+          <p className="text-sm text-zinc-500">© {new Date().getFullYear()} EventSphere. All rights reserved.</p>
+          <p className="text-sm text-zinc-500">Made in Nairobi, Kenya</p>
         </div>
       </div>
     </footer>

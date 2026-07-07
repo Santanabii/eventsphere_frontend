@@ -30,44 +30,29 @@ export default function Login() {
   }
 
   return (
-    <div
-      className="min-h-screen bg-bg flex items-center justify-center px-6 relative overflow-hidden"
-      style={{ paddingTop: 'var(--nav-height)' }}
-    >
-      <div
-        className="orb w-64 h-64 top-1/3 left-1/4"
-        style={{ background: 'color-mix(in srgb, var(--color-accent) 14%, transparent)' }}
-      />
+    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-6 pt-20">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
+        className="w-full max-w-md py-16">
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4 }}
-        className="relative z-10 w-full max-w-md"
-      >
         <div className="text-center mb-8">
           <Link to="/" className="inline-flex items-center gap-2.5">
             <Logo />
           </Link>
-          <h1 className="font-display font-bold text-2xl text-text mt-6">Welcome back</h1>
-          <p className="text-text-secondary mt-1.5 text-sm">Sign in to your account</p>
+          <h1 className="font-display font-bold text-2xl text-zinc-100 mt-6">Welcome back</h1>
+          <p className="text-zinc-400 mt-1.5 text-sm">Sign in to your account</p>
         </div>
 
-        <div className="glass rounded-[20px] p-8">
+        <div className="card p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
-
             <div>
               <label htmlFor="email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="email"
-                  type="email"
-                  value={form.email}
+                  id="email" type="email" value={form.email}
                   onChange={e => setForm({ ...form, email: e.target.value })}
-                  placeholder="you@example.com"
-                  required
-                  className="input pl-11"
+                  placeholder="you@example.com" required
+                  className="input input-icon-l"
                 />
               </div>
             </div>
@@ -75,32 +60,24 @@ export default function Login() {
             <div>
               <label htmlFor="password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-text-muted" />
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
                 <input
-                  id="password"
-                  type={showPassword ? 'text' : 'password'}
-                  value={form.password}
+                  id="password" type={showPassword ? 'text' : 'password'} value={form.password}
                   onChange={e => setForm({ ...form, password: e.target.value })}
-                  placeholder="••••••••"
-                  required
-                  className="input pl-11 pr-11"
+                  placeholder="••••••••" required
+                  className="input input-icon-l input-icon-r"
                 />
                 <button
-                  type="button"
-                  onClick={() => setShowPassword(!showPassword)}
+                  type="button" onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-text-muted hover:text-text transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-100 transition-colors"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
               </div>
             </div>
 
-            <button
-              type="submit"
-              disabled={loading}
-              className="btn-primary w-full py-3 text-[15px]"
-            >
+            <button type="submit" disabled={loading} className="btn-primary w-full py-3 text-[15px]">
               {loading ? (
                 <span className="flex items-center justify-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -110,11 +87,9 @@ export default function Login() {
             </button>
           </form>
 
-          <p className="text-center text-text-secondary text-sm mt-6">
+          <p className="text-center text-zinc-400 text-sm mt-6">
             Don't have an account?{' '}
-            <Link to="/register" className="text-accent-hover hover:text-text transition-colors font-medium">
-              Sign up
-            </Link>
+            <Link to="/register" className="text-violet-400 hover:text-zinc-100 transition-colors font-medium">Sign up</Link>
           </p>
         </div>
       </motion.div>

@@ -1,76 +1,35 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
-/* ─────────────────────────────────────────────
-   DESIGN TOKENS — single source of truth.
-   One accent family (violet), one warm neutral
-   used sparingly (amber) for price/emphasis only.
-   Never hardcode a hex value in a component —
-   use these Tailwind utilities instead
-   (bg-bg, text-text-secondary, border-border, etc.)
-───────────────────────────────────────────── */
-@theme {
-  --color-bg: #0A0A10;
-  --color-bg-soft: #0D0D14;
-  --color-surface: #131319;
-  --color-surface-hover: #17171F;
-  --color-border: #1E1E27;
-  --color-border-strong: #2A2A36;
-
-  --color-text: #EDEDF2;
-  --color-text-secondary: #8E8E9C;
-  --color-text-muted: #5A5A68;
-
-  --color-accent: #8B7CF6;
-  --color-accent-hover: #A296F9;
-  --color-amber: #D4A15E;
-
-  --color-success: #4ADE80;
-  --color-warning: #E8B95E;
-  --color-danger: #F0685C;
-
-  --font-display: 'Syne', sans-serif;
-  --font-body: 'DM Sans', sans-serif;
-
-  --nav-height: 72px;
-}
-
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
 
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: 16px;
+  background-color: #09090b; /* zinc-950 */
+  color: #f4f4f5;            /* zinc-100 */
+  font-family: 'DM Sans', sans-serif;
   line-height: 1.6;
-  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
 
-::selection {
-  background: color-mix(in srgb, var(--color-accent) 30%, transparent);
+.font-display {
+  font-family: 'Syne', sans-serif;
 }
 
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--color-bg);
+  background: #09090b;
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--color-border-strong);
+  background: #3f3f46; /* zinc-700 */
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-accent);
+  background: #8b5cf6; /* violet-500 */
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -82,79 +41,45 @@ body {
   }
 }
 
-@layer components {
-
-/* ── Layout ── */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 32px;
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 2px;
+  border-radius: 6px;
 }
 
-/* Standard page wrapper — consistent offset below the fixed navbar */
-.page {
-  min-height: 100vh;
-  background: var(--color-bg);
-  padding-top: calc(var(--nav-height) + 56px);
-}
-
-.section {
-  padding: 96px 0;
-}
-.section-sm {
-  padding: 56px 0;
-}
-
-/* ── Glass / surfaces ── */
-.glass {
-  background: color-mix(in srgb, var(--color-surface) 78%, transparent);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--color-border);
-}
-
+/* ── Cards ──────────────────────────────── */
 .card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
-  transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease, background-color 0.25s ease;
+  background: #18181b; /* zinc-900 */
+  border: 1px solid #27272a; /* zinc-800 */
+  border-radius: 16px;
+  transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
-
 .card:hover {
-  border-color: var(--color-border-strong);
-  background: var(--color-surface-hover);
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+  border-color: #3f3f46; /* zinc-700 */
+  background: #1c1c1f;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
-/* Cards that shouldn't lift (e.g. inside a sticky panel, or non-interactive) */
-.card-static:hover {
-  transform: none;
-}
-
-/* ── Buttons ── */
+/* ── Buttons ────────────────────────────── */
 .btn-primary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: var(--color-accent);
+  background: #8b5cf6; /* violet-500 */
   color: #fff;
   padding: 12px 26px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease, transform 0.15s ease;
-  text-decoration: none;
-  font-family: var(--font-body);
+  transition: background-color 0.2s ease;
 }
 .btn-primary:hover:not(:disabled) {
-  background: var(--color-accent-hover);
-}
-.btn-primary:active:not(:disabled) {
-  transform: scale(0.98);
+  background: #7c3aed; /* violet-600 */
 }
 
 .btn-ghost {
@@ -163,42 +88,39 @@ body {
   justify-content: center;
   gap: 8px;
   background: transparent;
-  color: var(--color-text);
+  color: #f4f4f5;
   padding: 11px 26px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
-  border: 1px solid var(--color-border-strong);
+  border: 1px solid #3f3f46;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
-  text-decoration: none;
-  font-family: var(--font-body);
 }
 .btn-ghost:hover:not(:disabled) {
-  border-color: var(--color-accent);
-  background: color-mix(in srgb, var(--color-accent) 8%, transparent);
+  border-color: #8b5cf6;
+  background: rgba(139, 92, 246, 0.08);
 }
 
-/* Secondary action — used sparingly for the warm/amber accent (e.g. resale) */
+/* Used once, sparingly — the resale action, so it doesn't blend into every other button */
 .btn-amber {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   background: transparent;
-  color: var(--color-amber);
+  color: #fbbf24; /* amber-400 */
   padding: 11px 22px;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
-  border: 1px solid color-mix(in srgb, var(--color-amber) 40%, transparent);
+  border: 1px solid rgba(251, 191, 36, 0.4);
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
-  font-family: var(--font-body);
 }
 .btn-amber:hover:not(:disabled) {
-  background: color-mix(in srgb, var(--color-amber) 10%, transparent);
-  border-color: var(--color-amber);
+  background: rgba(251, 191, 36, 0.1);
+  border-color: #fbbf24;
 }
 
 button:disabled {
@@ -206,21 +128,38 @@ button:disabled {
   cursor: not-allowed;
 }
 
-/* ── Typography ── */
-.font-display {
-  font-family: var(--font-display);
+/* ── Inputs ─────────────────────────────── */
+.input {
+  width: 100%;
+  background: #09090b;
+  border: 1px solid #27272a;
+  border-radius: 10px;
+  padding: 12px 16px;
+  color: #f4f4f5;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.input:focus {
+  border-color: #8b5cf6;
+  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+}
+.input::placeholder {
+  color: #71717a; /* zinc-500 */
+}
+/* Add alongside .input when there's a left/right icon inside the field */
+.input-icon-l { padding-left: 44px; }
+.input-icon-r { padding-right: 44px; }
+
+.field-label {
+  font-size: 13px;
+  color: #a1a1aa; /* zinc-400 */
+  margin-bottom: 8px;
+  display: block;
 }
 
-.eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--color-text-muted);
-  margin-bottom: 12px;
-}
-
+/* ── Badges ─────────────────────────────── */
 .badge {
   display: inline-flex;
   align-items: center;
@@ -231,114 +170,40 @@ button:disabled {
   font-weight: 500;
   border: 1px solid transparent;
 }
-.badge-accent {
-  background: color-mix(in srgb, var(--color-accent) 12%, transparent);
-  color: var(--color-accent-hover);
-  border-color: color-mix(in srgb, var(--color-accent) 25%, transparent);
+.badge-violet { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border-color: rgba(139, 92, 246, 0.25); }
+.badge-green  { background: rgba(52, 211, 153, 0.12); color: #34d399; border-color: rgba(52, 211, 153, 0.25); }
+.badge-amber  { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border-color: rgba(251, 191, 36, 0.25); }
+.badge-muted  { background: rgba(161, 161, 170, 0.12); color: #a1a1aa; border-color: #3f3f46; }
+
+/* ── Misc ───────────────────────────────── */
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #71717a;
+  margin-bottom: 12px;
 }
-.badge-success {
-  background: color-mix(in srgb, var(--color-success) 12%, transparent);
-  color: var(--color-success);
-  border-color: color-mix(in srgb, var(--color-success) 25%, transparent);
-}
-.badge-warning {
-  background: color-mix(in srgb, var(--color-warning) 12%, transparent);
-  color: var(--color-warning);
-  border-color: color-mix(in srgb, var(--color-warning) 25%, transparent);
-}
-.badge-muted {
-  background: color-mix(in srgb, var(--color-text-muted) 14%, transparent);
-  color: var(--color-text-secondary);
-  border-color: var(--color-border-strong);
+
+.glass {
+  background: rgba(24, 24, 27, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid #27272a;
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--color-border-strong), transparent);
+  background: linear-gradient(90deg, transparent, #3f3f46, transparent);
   border: none;
-}
-
-/* ── Orbs (used once in the hero — not repeated per-section) ── */
-.orb {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(90px);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Inputs ── */
-.field-label {
-  font-size: 13px;
-  color: var(--color-text-secondary);
-  margin-bottom: 8px;
-  display: block;
-}
-
-.input {
-  width: 100%;
-  background: var(--color-bg-soft);
-  border: 1px solid var(--color-border);
-  border-radius: 12px;
-  padding: 13px 16px;
-  color: var(--color-text);
-  font-family: var(--font-body);
-  font-size: 14px;
-  outline: none;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-.input:focus {
-  border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-accent) 15%, transparent);
-}
-.input:focus-visible {
-  outline: 2px solid color-mix(in srgb, var(--color-accent) 50%, transparent);
-  outline-offset: 1px;
-}
-.input::placeholder {
-  color: var(--color-text-muted);
-}
-
-/* Visible keyboard focus everywhere, not just inputs */
-a:focus-visible,
-button:focus-visible {
-  outline: 2px solid var(--color-accent);
-  outline-offset: 2px;
-  border-radius: 8px;
-}
-
-/* ── Grids ── */
-.grid-3 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-}
-
-/* ── Skeleton loading ── */
-.skeleton {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: 20px;
-  position: relative;
-  overflow: hidden;
-}
-.skeleton::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--color-text) 4%, transparent), transparent);
-  animation: shimmer 1.6s infinite;
-}
-@keyframes shimmer {
-  from { transform: translateX(-100%); }
-  to { transform: translateX(100%); }
 }
 
 .spinner {
   width: 28px;
   height: 28px;
-  border: 2px solid var(--color-border-strong);
-  border-top-color: var(--color-accent);
+  border: 2px solid #3f3f46;
+  border-top-color: #8b5cf6;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
@@ -346,32 +211,21 @@ button:focus-visible {
   to { transform: rotate(360deg); }
 }
 
-/* ── Responsive ── */
-@media (max-width: 992px) {
-  .grid-3 {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.skeleton {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
 }
-
-@media (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
-  .section {
-    padding: 64px 0;
-  }
+.skeleton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.04), transparent);
+  animation: shimmer 1.6s infinite;
 }
-
-@media (max-width: 640px) {
-  .grid-3 {
-    grid-template-columns: 1fr;
-  }
-  .container {
-    padding: 0 16px;
-  }
-  .section {
-    padding: 48px 0;
-  }
+@keyframes shimmer {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(100%); }
 }
-
-} /* end @layer components */
