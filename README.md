@@ -89,8 +89,7 @@ Out of scope for this bundle (separate repo), but at minimum you'll need these s
 4. `vercel.json` (included in this bundle) adds the rewrite rule React Router needs — without it, refreshing on any route other than `/` (e.g. `/events/12`) 404s in production. Make sure it's in the project root, not inside `src/`.
 5. Deploy. Every push to your main branch redeploys automatically.
 
-### Custom domain (optional)
-If you're pointing a `.co.ke` domain (e.g. via Truehost/KENIC) at this: add the domain in Vercel's project settings, then create the CNAME/A record your registrar's DNS panel specifies. Don't forget to add the final custom domain to the backend's `CORS_ALLOWED_ORIGINS` too, or requests will start failing once DNS cuts over.
+
 
 ## Scripts
 
