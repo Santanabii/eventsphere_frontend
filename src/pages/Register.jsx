@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Mail, Lock, User, Phone, Eye, EyeOff } from 'lucide-react'
+import { Mail, Lock, User, Phone, Eye, EyeOff, ArrowLeft } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 import toast from 'react-hot-toast'
 import Logo from '../components/Logo'
@@ -31,6 +31,14 @@ export default function Register() {
 
   return (
     <div className="min-h-screen bg-[#0A0A18] flex items-center justify-center px-6 pt-20">
+      <Link
+        to="/"
+        className="fixed top-6 left-6 flex items-center gap-2 text-sm text-[#8888AA] hover:text-[#F0F0FF] transition-colors z-10"
+      >
+        <ArrowLeft size={16} />
+        Back to home
+      </Link>
+
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
         className="w-full max-w-md py-16">
 
