@@ -50,7 +50,6 @@ src/
 
 ```bash
 npm install
-cp .env.example .env      # then edit VITE_API_URL if your backend isn't on the default port
 npm run dev
 ```
 
