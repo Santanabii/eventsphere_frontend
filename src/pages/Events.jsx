@@ -23,19 +23,19 @@ export default function Events() {
   }) || []
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-32 pb-24 px-6">
+    <div className="min-h-screen bg-[#0A0A18] pt-32 pb-24 px-6">
       <Navbar />
 
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
           <span className="eyebrow">Discover</span>
-          <h1 className="font-display font-bold text-3xl text-zinc-100">All events</h1>
-          <p className="text-zinc-400 mt-2">Find your next unforgettable experience</p>
+          <h1 className="font-display font-bold text-3xl text-[#F0F0FF]">All events</h1>
+          <p className="text-[#8888AA] mt-2">Find your next unforgettable experience</p>
         </motion.div>
 
         <div className="flex flex-col sm:flex-row gap-3 max-w-xl mx-auto mb-14">
           <div className="relative flex-1">
-            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+            <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
             <label htmlFor="event-search" className="sr-only">Search events or venues</label>
             <input
               id="event-search"
@@ -53,8 +53,8 @@ export default function Events() {
                 onClick={() => setFilter(f)}
                 className={`px-5 py-3 rounded-lg text-sm font-medium capitalize transition-colors ${
                   filter === f
-                    ? 'bg-violet-500 text-white'
-                    : 'bg-zinc-900 border border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                    ? 'bg-[#7C3AED] text-white'
+                    : 'bg-[#16163A] border border-[#2A2A5A] text-[#8888AA] hover:border-[#3D3D75]'
                 }`}
               >
                 {f === 'all' ? 'All' : 'Published'}
@@ -77,11 +77,11 @@ export default function Events() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <div className="w-16 h-16 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center mx-auto mb-4">
-              <Search size={26} className="text-zinc-500" />
+            <div className="w-16 h-16 rounded-full bg-[#16163A] border border-[#2A2A5A] flex items-center justify-center mx-auto mb-4">
+              <Search size={26} className="text-[#6E6E96]" />
             </div>
-            <p className="text-zinc-100 text-lg font-medium">No events found</p>
-            <p className="text-zinc-500 text-sm mt-1">Try adjusting your search</p>
+            <p className="text-[#F0F0FF] text-lg font-medium">No events found</p>
+            <p className="text-[#6E6E96] text-sm mt-1">Try adjusting your search</p>
           </div>
         )}
       </div>

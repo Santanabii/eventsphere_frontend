@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap');
 
 
 html {
@@ -7,8 +6,8 @@ html {
 }
 
 body {
-  background-color: #09090b; /* zinc-950 */
-  color: #f4f4f5;            /* zinc-100 */
+  background-color: #0A0A18;
+  color: #F0F0FF;
   font-family: 'DM Sans', sans-serif;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
@@ -22,14 +21,14 @@ body {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #09090b;
+  background: #0A0A18;
 }
 ::-webkit-scrollbar-thumb {
-  background: #3f3f46; /* zinc-700 */
+  background: #3D3D75;
   border-radius: 99px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #8b5cf6; /* violet-500 */
+  background: #7C3AED;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -43,21 +42,21 @@ body {
 
 a:focus-visible,
 button:focus-visible {
-  outline: 2px solid #8b5cf6;
+  outline: 2px solid #7C3AED;
   outline-offset: 2px;
   border-radius: 6px;
 }
 
 /* ── Cards ──────────────────────────────── */
 .card {
-  background: #18181b; /* zinc-900 */
-  border: 1px solid #27272a; /* zinc-800 */
+  background: #16163A;
+  border: 1px solid #2A2A5A;
   border-radius: 16px;
   transition: border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 .card:hover {
-  border-color: #3f3f46; /* zinc-700 */
-  background: #1c1c1f;
+  border-color: #3D3D75;
+  background: #1A1A42;
   transform: translateY(-2px);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
@@ -68,7 +67,7 @@ button:focus-visible {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  background: #8b5cf6; /* violet-500 */
+  background: linear-gradient(135deg, #7C3AED 0%, #A855F7 100%);
   color: #fff;
   padding: 12px 26px;
   border-radius: 10px;
@@ -76,10 +75,13 @@ button:focus-visible {
   font-size: 14px;
   border: none;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: filter 0.2s ease, transform 0.15s ease;
 }
 .btn-primary:hover:not(:disabled) {
-  background: #7c3aed; /* violet-600 */
+  filter: brightness(1.1);
+}
+.btn-primary:active:not(:disabled) {
+  transform: scale(0.98);
 }
 
 .btn-ghost {
@@ -88,39 +90,40 @@ button:focus-visible {
   justify-content: center;
   gap: 8px;
   background: transparent;
-  color: #f4f4f5;
+  color: #F0F0FF;
   padding: 11px 26px;
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
-  border: 1px solid #3f3f46;
+  border: 1px solid #3D3D75;
   cursor: pointer;
   transition: border-color 0.2s ease, background-color 0.2s ease;
 }
 .btn-ghost:hover:not(:disabled) {
-  border-color: #8b5cf6;
-  background: rgba(139, 92, 246, 0.08);
+  border-color: #7C3AED;
+  background: rgba(124, 58, 237, 0.08);
 }
 
-/* Used once, sparingly — the resale action, so it doesn't blend into every other button */
-.btn-amber {
+/* The deck's second brand accent — orange. Used for the resale action
+   and anywhere a highlight needs to read as distinct from the primary CTA. */
+.btn-orange {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
   background: transparent;
-  color: #fbbf24; /* amber-400 */
+  color: #F97316;
   padding: 11px 22px;
   border-radius: 10px;
   font-weight: 500;
   font-size: 14px;
-  border: 1px solid rgba(251, 191, 36, 0.4);
+  border: 1px solid rgba(249, 115, 22, 0.4);
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
 }
-.btn-amber:hover:not(:disabled) {
-  background: rgba(251, 191, 36, 0.1);
-  border-color: #fbbf24;
+.btn-orange:hover:not(:disabled) {
+  background: rgba(249, 115, 22, 0.1);
+  border-color: #F97316;
 }
 
 button:disabled {
@@ -131,22 +134,22 @@ button:disabled {
 /* ── Inputs ─────────────────────────────── */
 .input {
   width: 100%;
-  background: #09090b;
-  border: 1px solid #27272a;
+  background: #0A0A18;
+  border: 1px solid #2A2A5A;
   border-radius: 10px;
   padding: 12px 16px;
-  color: #f4f4f5;
+  color: #F0F0FF;
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 .input:focus {
-  border-color: #8b5cf6;
-  box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+  border-color: #7C3AED;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15);
 }
 .input::placeholder {
-  color: #71717a; /* zinc-500 */
+  color: #6E6E96;
 }
 /* Add alongside .input when there's a left/right icon inside the field */
 .input-icon-l { padding-left: 44px; }
@@ -154,7 +157,7 @@ button:disabled {
 
 .field-label {
   font-size: 13px;
-  color: #a1a1aa; /* zinc-400 */
+  color: #8888AA;
   margin-bottom: 8px;
   display: block;
 }
@@ -170,10 +173,10 @@ button:disabled {
   font-weight: 500;
   border: 1px solid transparent;
 }
-.badge-violet { background: rgba(139, 92, 246, 0.12); color: #a78bfa; border-color: rgba(139, 92, 246, 0.25); }
-.badge-green  { background: rgba(52, 211, 153, 0.12); color: #34d399; border-color: rgba(52, 211, 153, 0.25); }
-.badge-amber  { background: rgba(251, 191, 36, 0.12); color: #fbbf24; border-color: rgba(251, 191, 36, 0.25); }
-.badge-muted  { background: rgba(161, 161, 170, 0.12); color: #a1a1aa; border-color: #3f3f46; }
+.badge-violet { background: rgba(124, 58, 237, 0.15); color: #A855F7; border-color: rgba(124, 58, 237, 0.3); }
+.badge-orange { background: rgba(249, 115, 22, 0.15); color: #F97316; border-color: rgba(249, 115, 22, 0.3); }
+.badge-green  { background: rgba(52, 211, 153, 0.15); color: #34d399; border-color: rgba(52, 211, 153, 0.3); }
+.badge-muted  { background: rgba(136, 136, 170, 0.15); color: #8888AA; border-color: #3D3D75; }
 
 /* ── Misc ───────────────────────────────── */
 .eyebrow {
@@ -182,28 +185,40 @@ button:disabled {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: #71717a;
+  color: #F97316;
   margin-bottom: 12px;
 }
 
 .glass {
-  background: rgba(24, 24, 27, 0.75);
+  background: rgba(22, 22, 58, 0.75);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid #27272a;
+  border: 1px solid #2A2A5A;
+}
+
+/* Richer than .glass — used once, for the bento-style featured card on Landing */
+.glass-card {
+  background: linear-gradient(135deg, rgba(22, 22, 58, 0.85) 0%, rgba(10, 10, 24, 0.7) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(124, 58, 237, 0.25);
+  transition: border-color 0.25s ease;
+}
+.glass-card:hover {
+  border-color: rgba(124, 58, 237, 0.45);
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, #3f3f46, transparent);
+  background: linear-gradient(90deg, transparent, #3D3D75, transparent);
   border: none;
 }
 
 .spinner {
   width: 28px;
   height: 28px;
-  border: 2px solid #3f3f46;
-  border-top-color: #8b5cf6;
+  border: 2px solid #3D3D75;
+  border-top-color: #7C3AED;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
@@ -212,8 +227,8 @@ button:disabled {
 }
 
 .skeleton {
-  background: #18181b;
-  border: 1px solid #27272a;
+  background: #16163A;
+  border: 1px solid #2A2A5A;
   border-radius: 16px;
   position: relative;
   overflow: hidden;

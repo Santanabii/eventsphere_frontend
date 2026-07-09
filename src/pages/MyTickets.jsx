@@ -37,19 +37,19 @@ export default function MyTickets() {
     }
   })
 
-  const statusBadge = { active: 'badge-green', listed: 'badge-amber', used: 'badge-muted', transferred: 'badge-violet' }
+  const statusBadge = { active: 'badge-green', listed: 'badge-orange', used: 'badge-muted', transferred: 'badge-violet' }
   const formatDate = (d) => new Date(d).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-32 pb-24 px-6">
+    <div className="min-h-screen bg-[#0A0A18] pt-32 pb-24 px-6">
       <Navbar />
 
       <div className="max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }}>
           <div className="mb-10">
             <span className="eyebrow">Your collection</span>
-            <h1 className="font-display font-bold text-3xl text-zinc-100">My tickets</h1>
-            <p className="text-zinc-400 mt-1">{tickets?.length || 0} ticket{tickets?.length !== 1 ? 's' : ''}</p>
+            <h1 className="font-display font-bold text-3xl text-[#F0F0FF]">My tickets</h1>
+            <p className="text-[#8888AA] mt-1">{tickets?.length || 0} ticket{tickets?.length !== 1 ? 's' : ''}</p>
           </div>
 
           {isLoading ? (
@@ -58,9 +58,9 @@ export default function MyTickets() {
             </div>
           ) : tickets?.length === 0 ? (
             <div className="text-center py-20 card">
-              <Ticket size={40} className="text-zinc-600 mx-auto mb-4" />
-              <p className="text-lg font-medium text-zinc-100">No tickets yet</p>
-              <p className="text-zinc-500 mt-1">Purchase tickets to events to see them here</p>
+              <Ticket size={40} className="text-[#54547A] mx-auto mb-4" />
+              <p className="text-lg font-medium text-[#F0F0FF]">No tickets yet</p>
+              <p className="text-[#6E6E96] mt-1">Purchase tickets to events to see them here</p>
             </div>
           ) : (
             <div className="space-y-4">
@@ -69,34 +69,34 @@ export default function MyTickets() {
                   className="card p-6 flex flex-col md:flex-row gap-6">
                   <div className="flex-1">
                     <div className="flex items-start justify-between gap-4 mb-4">
-                      <h3 className="font-display font-semibold text-lg text-zinc-100">{ticket.event_title}</h3>
+                      <h3 className="font-display font-semibold text-lg text-[#F0F0FF]">{ticket.event_title}</h3>
                       <span className={`badge capitalize ${statusBadge[ticket.status] || 'badge-muted'}`}>{ticket.status}</span>
                     </div>
 
                     <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <Calendar size={14} className="text-zinc-500" /> {formatDate(ticket.event_date)}
+                      <div className="flex items-center gap-2 text-[#8888AA]">
+                        <Calendar size={14} className="text-[#6E6E96]" /> {formatDate(ticket.event_date)}
                       </div>
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <MapPin size={14} className="text-zinc-500" /> {ticket.event_venue}
+                      <div className="flex items-center gap-2 text-[#8888AA]">
+                        <MapPin size={14} className="text-[#6E6E96]" /> {ticket.event_venue}
                       </div>
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <Ticket size={14} className="text-zinc-500" /> {ticket.tier_name}
+                      <div className="flex items-center gap-2 text-[#8888AA]">
+                        <Ticket size={14} className="text-[#6E6E96]" /> {ticket.tier_name}
                       </div>
-                      <div className="flex items-center gap-2 text-zinc-400">
-                        <Tag size={14} className="text-zinc-500" /> KES {parseFloat(ticket.purchase_price).toLocaleString()}
+                      <div className="flex items-center gap-2 text-[#8888AA]">
+                        <Tag size={14} className="text-[#6E6E96]" /> KES {parseFloat(ticket.purchase_price).toLocaleString()}
                       </div>
                     </div>
 
                     <div className="mt-4 flex items-center gap-2">
-                      <QrCode size={14} className="text-zinc-500" />
-                      <code className="text-xs text-zinc-400 bg-zinc-950 px-3 py-1 rounded-lg">{ticket.qr_token}</code>
+                      <QrCode size={14} className="text-[#6E6E96]" />
+                      <code className="text-xs text-[#8888AA] bg-[#0A0A18] px-3 py-1 rounded-lg">{ticket.qr_token}</code>
                     </div>
                   </div>
 
                   {ticket.status === 'active' && (
                     <div className="flex md:flex-col gap-3 justify-end">
-                      <button onClick={() => setListingTicket(ticket)} className="btn-amber text-sm py-2 px-4 whitespace-nowrap">
+                      <button onClick={() => setListingTicket(ticket)} className="btn-orange text-sm py-2 px-4 whitespace-nowrap">
                         List for resale
                       </button>
                     </div>
@@ -118,16 +118,16 @@ export default function MyTickets() {
             <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
               className="card p-8 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-6">
-                <h3 id="list-modal-title" className="font-display font-semibold text-lg text-zinc-100">List for resale</h3>
-                <button onClick={() => setListingTicket(null)} aria-label="Close" className="text-zinc-500 hover:text-zinc-100">
+                <h3 id="list-modal-title" className="font-display font-semibold text-lg text-[#F0F0FF]">List for resale</h3>
+                <button onClick={() => setListingTicket(null)} aria-label="Close" className="text-[#6E6E96] hover:text-[#F0F0FF]">
                   <X size={18} />
                 </button>
               </div>
 
-              <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 mb-6">
-                <p className="font-medium text-zinc-100">{listingTicket.event_title}</p>
-                <p className="text-sm text-zinc-400 mt-1">{listingTicket.tier_name}</p>
-                <p className="text-sm text-zinc-400">Original price: KES {parseFloat(listingTicket.purchase_price).toLocaleString()}</p>
+              <div className="bg-[#0A0A18] border border-[#2A2A5A] rounded-xl p-4 mb-6">
+                <p className="font-medium text-[#F0F0FF]">{listingTicket.event_title}</p>
+                <p className="text-sm text-[#8888AA] mt-1">{listingTicket.tier_name}</p>
+                <p className="text-sm text-[#8888AA]">Original price: KES {parseFloat(listingTicket.purchase_price).toLocaleString()}</p>
               </div>
 
               <div className="mb-6">
@@ -137,7 +137,7 @@ export default function MyTickets() {
                   onChange={e => setAskingPrice(e.target.value)}
                   placeholder="e.g. 600" className="input"
                 />
-                <p className="text-xs text-zinc-500 mt-2">Price cap applies — check event resale rules</p>
+                <p className="text-xs text-[#6E6E96] mt-2">Price cap applies — check event resale rules</p>
               </div>
 
               <div className="flex gap-3">

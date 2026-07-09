@@ -67,14 +67,14 @@ export default function Marketplace() {
   const formatDate = (d) => new Date(d).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-32 pb-24 px-6">
+    <div className="min-h-screen bg-[#0A0A18] pt-32 pb-24 px-6">
       <Navbar />
 
       <div className="max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-center mb-10">
           <span className="eyebrow">Secondary market</span>
-          <h1 className="font-display font-bold text-3xl text-zinc-100">Ticket marketplace</h1>
-          <p className="text-zinc-400 mt-2">Buy resale tickets safely — all transfers are verified and fraud-protected</p>
+          <h1 className="font-display font-bold text-3xl text-[#F0F0FF]">Ticket marketplace</h1>
+          <p className="text-[#8888AA] mt-2">Buy resale tickets safely — all transfers are verified and fraud-protected</p>
         </motion.div>
 
         <div className="grid grid-cols-3 gap-4 mb-14 max-w-lg mx-auto">
@@ -84,8 +84,8 @@ export default function Marketplace() {
             { label: 'Platform fee', value: '10%' },
           ].map((s, i) => (
             <div key={i} className="card p-5 text-center">
-              <p className="font-display font-bold text-2xl text-zinc-100">{s.value}</p>
-              <p className="text-xs text-zinc-500 mt-1">{s.label}</p>
+              <p className="font-display font-bold text-2xl text-[#F0F0FF]">{s.value}</p>
+              <p className="text-xs text-[#6E6E96] mt-1">{s.label}</p>
             </div>
           ))}
         </div>
@@ -96,9 +96,9 @@ export default function Marketplace() {
           </div>
         ) : listings?.length === 0 ? (
           <div className="text-center py-20 card">
-            <ShoppingBag size={40} className="text-zinc-600 mx-auto mb-4" />
-            <p className="text-lg font-medium text-zinc-100">No listings yet</p>
-            <p className="text-zinc-500 mt-1">Be the first to list a ticket for resale</p>
+            <ShoppingBag size={40} className="text-[#54547A] mx-auto mb-4" />
+            <p className="text-lg font-medium text-[#F0F0FF]">No listings yet</p>
+            <p className="text-[#6E6E96] mt-1">Be the first to list a ticket for resale</p>
           </div>
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -108,31 +108,31 @@ export default function Marketplace() {
                 <motion.div key={listing.id} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.04 }}
                   className="card p-6 flex flex-col">
                   <div className="flex justify-between items-start mb-4 gap-2">
-                    <h3 className="font-display font-semibold text-zinc-100 text-lg line-clamp-1">{listing.event_title}</h3>
+                    <h3 className="font-display font-semibold text-[#F0F0FF] text-lg line-clamp-1">{listing.event_title}</h3>
                     <span className="badge badge-violet whitespace-nowrap">{listing.tier_name}</span>
                   </div>
 
                   <div className="space-y-2 mb-4 flex-1">
-                    <div className="flex items-center gap-2 text-sm text-zinc-400">
-                      <Calendar size={13} className="text-zinc-500" /> {formatDate(listing.event_date)}
+                    <div className="flex items-center gap-2 text-sm text-[#8888AA]">
+                      <Calendar size={13} className="text-[#6E6E96]" /> {formatDate(listing.event_date)}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-zinc-400">
-                      <MapPin size={13} className="text-zinc-500" /> {listing.event_venue}
+                    <div className="flex items-center gap-2 text-sm text-[#8888AA]">
+                      <MapPin size={13} className="text-[#6E6E96]" /> {listing.event_venue}
                     </div>
-                    <div className="flex items-center gap-2 text-sm text-zinc-400">
-                      <Tag size={13} className="text-zinc-500" /> Original: KES {parseFloat(listing.original_price).toLocaleString()}
+                    <div className="flex items-center gap-2 text-sm text-[#8888AA]">
+                      <Tag size={13} className="text-[#6E6E96]" /> Original: KES {parseFloat(listing.original_price).toLocaleString()}
                     </div>
                   </div>
 
-                  <div className="border-t border-zinc-800 pt-4 flex items-center justify-between">
+                  <div className="border-t border-[#2A2A5A] pt-4 flex items-center justify-between">
                     <div>
-                      <p className="text-xs text-zinc-500">Asking price</p>
-                      <p className="font-display font-bold text-lg text-zinc-100">
+                      <p className="text-xs text-[#6E6E96]">Asking price</p>
+                      <p className="font-display font-bold text-lg text-[#F0F0FF]">
                         KES {parseFloat(listing.asking_price).toLocaleString()}
                       </p>
                       <div className="flex items-center gap-1 mt-1">
-                        {above ? <TrendingUp size={11} className="text-amber-400" /> : <TrendingDown size={11} className="text-emerald-400" />}
-                        <span className={`text-xs ${above ? 'text-amber-400' : 'text-emerald-400'}`}>
+                        {above ? <TrendingUp size={11} className="text-[#F97316]" /> : <TrendingDown size={11} className="text-emerald-400" />}
+                        <span className={`text-xs ${above ? 'text-[#F97316]' : 'text-emerald-400'}`}>
                           {above ? 'Above' : 'Below'} face value
                         </span>
                       </div>
@@ -161,19 +161,19 @@ export default function Marketplace() {
             <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
               className="card p-8 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
               <div className="flex items-center justify-between mb-6">
-                <h3 id="buy-modal-title" className="font-display font-semibold text-lg text-zinc-100">Complete purchase</h3>
-                <button onClick={() => { setBuyingListing(null); setPhone('') }} aria-label="Close" className="text-zinc-500 hover:text-zinc-100">
+                <h3 id="buy-modal-title" className="font-display font-semibold text-lg text-[#F0F0FF]">Complete purchase</h3>
+                <button onClick={() => { setBuyingListing(null); setPhone('') }} aria-label="Close" className="text-[#6E6E96] hover:text-[#F0F0FF]">
                   <X size={18} />
                 </button>
               </div>
 
-              <div className="bg-zinc-950 border border-zinc-800 rounded-xl p-4 mb-6">
-                <p className="font-medium text-zinc-100">{buyingListing.event_title}</p>
-                <p className="text-sm text-zinc-400">{buyingListing.tier_name} · {buyingListing.event_venue}</p>
-                <p className="font-display font-bold text-lg text-zinc-100 mt-2">
+              <div className="bg-[#0A0A18] border border-[#2A2A5A] rounded-xl p-4 mb-6">
+                <p className="font-medium text-[#F0F0FF]">{buyingListing.event_title}</p>
+                <p className="text-sm text-[#8888AA]">{buyingListing.tier_name} · {buyingListing.event_venue}</p>
+                <p className="font-display font-bold text-lg text-[#F0F0FF] mt-2">
                   KES {parseFloat(buyingListing.asking_price).toLocaleString()}
                 </p>
-                <p className="text-xs text-zinc-500 mt-1">
+                <p className="text-xs text-[#6E6E96] mt-1">
                   Platform fee (10%): KES {(parseFloat(buyingListing.asking_price) * 0.1).toLocaleString()}
                 </p>
               </div>
@@ -181,7 +181,7 @@ export default function Marketplace() {
               <div className="mb-6">
                 <label htmlFor="buy-phone" className="field-label">M-Pesa phone number</label>
                 <div className="relative">
-                  <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                  <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
                   <input
                     id="buy-phone" type="tel" value={phone}
                     onChange={e => setPhone(e.target.value)}
@@ -204,7 +204,7 @@ export default function Marketplace() {
       {polling && (
         <div className="fixed bottom-6 right-6 card p-4 flex items-center gap-3 z-50">
           <div className="spinner" style={{ width: 18, height: 18 }} />
-          <p className="text-sm text-zinc-100">Waiting for payment...</p>
+          <p className="text-sm text-[#F0F0FF]">Waiting for payment...</p>
         </div>
       )}
     </div>

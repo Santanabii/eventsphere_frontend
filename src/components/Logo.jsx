@@ -14,12 +14,12 @@ export default function Logo({ size = 32, showText = true, textSize = 'text-lg' 
         aria-hidden="true"
         className="flex-shrink-0"
       >
-        <rect width="32" height="32" rx="9" fill="#8b5cf6" />
+        <rect width="32" height="32" rx="9" fill="#7C3AED" />
         <circle cx="15" cy="18" r="6" stroke="white" strokeWidth="1.6" fill="none" />
         <circle cx="21" cy="10.5" r="2" fill="white" />
       </svg>
       {showText && (
-        <span className={`font-display font-bold text-zinc-100 tracking-tight ${textSize}`}>
+        <span className={`font-display font-bold text-[#F0F0FF] tracking-tight ${textSize}`}>
           EventSphere
         </span>
       )}

@@ -36,24 +36,24 @@ export default function Scanner() {
 
   const resultConfig = {
     valid:   { icon: <CheckCircle size={56} />, className: 'text-emerald-400', border: 'border-emerald-500/30', title: 'Valid ticket' },
-    used:    { icon: <AlertCircle size={56} />, className: 'text-amber-400',   border: 'border-amber-500/30',   title: 'Already used' },
+    used:    { icon: <AlertCircle size={56} />, className: 'text-[#F97316]',   border: 'border-[#F97316]/30',   title: 'Already used' },
     invalid: { icon: <XCircle size={56} />,     className: 'text-red-400',     border: 'border-red-500/30',     title: 'Invalid ticket' },
   }
 
   const config = result ? resultConfig[result.result] : null
 
   return (
-    <div className="min-h-screen bg-zinc-950 pt-32 pb-24 px-6">
+    <div className="min-h-screen bg-[#0A0A18] pt-32 pb-24 px-6">
       <Navbar />
 
       <div className="max-w-lg mx-auto">
         <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} className="text-center">
           <div className="mb-8">
-            <div className="w-14 h-14 rounded-2xl bg-violet-500/10 flex items-center justify-center mx-auto mb-4">
-              <QrCode size={28} className="text-violet-400" />
+            <div className="w-14 h-14 rounded-2xl bg-[#7C3AED]/10 flex items-center justify-center mx-auto mb-4">
+              <QrCode size={28} className="text-[#A855F7]" />
             </div>
-            <h1 className="font-display font-bold text-3xl text-zinc-100">Gate scanner</h1>
-            <p className="text-zinc-400 mt-1.5">Scan attendee QR codes for entry</p>
+            <h1 className="font-display font-bold text-3xl text-[#F0F0FF]">Gate scanner</h1>
+            <p className="text-[#8888AA] mt-1.5">Scan attendee QR codes for entry</p>
           </div>
 
           {scanning && !result && (
@@ -66,30 +66,30 @@ export default function Scanner() {
             <motion.div initial={{ opacity: 0, scale: 0.94 }} animate={{ opacity: 1, scale: 1 }}
               className={`card p-8 border ${config.border}`}>
               <div className={`flex justify-center mb-4 ${config.className}`}>{config.icon}</div>
-              <h2 className="font-display font-bold text-xl text-zinc-100 mb-4">{config.title}</h2>
+              <h2 className="font-display font-bold text-xl text-[#F0F0FF] mb-4">{config.title}</h2>
 
               {result.owner && (
-                <div className="space-y-2 mb-6 text-left bg-zinc-950 rounded-xl p-4">
+                <div className="space-y-2 mb-6 text-left bg-[#0A0A18] rounded-xl p-4">
                   <div className="flex justify-between text-sm">
-                    <span className="text-zinc-400">Attendee</span>
-                    <span className="text-zinc-100 font-medium">{result.owner}</span>
+                    <span className="text-[#8888AA]">Attendee</span>
+                    <span className="text-[#F0F0FF] font-medium">{result.owner}</span>
                   </div>
                   {result.tier && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-zinc-400">Tier</span>
-                      <span className="text-zinc-100 font-medium">{result.tier}</span>
+                      <span className="text-[#8888AA]">Tier</span>
+                      <span className="text-[#F0F0FF] font-medium">{result.tier}</span>
                     </div>
                   )}
                   {result.event && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-zinc-400">Event</span>
-                      <span className="text-zinc-100 font-medium">{result.event}</span>
+                      <span className="text-[#8888AA]">Event</span>
+                      <span className="text-[#F0F0FF] font-medium">{result.event}</span>
                     </div>
                   )}
                   {result.message && (
                     <div className="flex justify-between text-sm">
-                      <span className="text-zinc-400">Status</span>
-                      <span className="text-zinc-100 font-medium">{result.message}</span>
+                      <span className="text-[#8888AA]">Status</span>
+                      <span className="text-[#F0F0FF] font-medium">{result.message}</span>
                     </div>
                   )}
                 </div>

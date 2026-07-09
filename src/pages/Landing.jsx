@@ -1,9 +1,8 @@
 import { Link } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { ArrowRight, Ticket, ShoppingBag, QrCode, BarChart3, Shield, Zap } from 'lucide-react'
+import { ArrowRight, Ticket, ShoppingBag, QrCode, BarChart3, Shield, Zap, Calendar, MapPin } from 'lucide-react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
-import EventCard from '../components/EventCard'
 import { eventsAPI } from '../services/api'
 import { useQuery } from '@tanstack/react-query'
 
@@ -33,29 +32,29 @@ export default function Landing() {
   const published = events?.filter((e) => e.status === 'published').slice(0, 3) || []
 
   return (
-    <div className="bg-zinc-950">
+    <div className="bg-[#0A0A18]">
       <Navbar />
 
       {/* Hero — pt-40 clears the fixed h-20 navbar with plenty of room to spare */}
       <section className="relative overflow-hidden pt-40 pb-28 px-6">
-        <div className="absolute w-[500px] h-[500px] rounded-full bg-violet-600/15 blur-[100px] -top-32 -left-32 pointer-events-none" />
-        <div className="absolute w-[400px] h-[400px] rounded-full bg-violet-600/10 blur-[100px] -bottom-20 -right-20 pointer-events-none" />
+        <div className="absolute w-[500px] h-[500px] rounded-full bg-[#7C3AED]/15 blur-[100px] -top-32 -left-32 pointer-events-none" />
+        <div className="absolute w-[400px] h-[400px] rounded-full bg-[#7C3AED]/10 blur-[100px] -bottom-20 -right-20 pointer-events-none" />
 
         <div className="max-w-4xl mx-auto relative text-center">
           <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0}
             className="inline-flex items-center gap-2.5 badge badge-violet mb-9 text-[13px] px-4 py-2">
-            <span className="w-1.5 h-1.5 rounded-full bg-violet-400" />
+            <span className="w-1.5 h-1.5 rounded-full bg-[#A855F7]" />
             Kenya's hybrid ticket marketplace
           </motion.div>
 
           <motion.h1 variants={fadeUp} initial="hidden" animate="show" custom={1}
             className="font-display font-bold text-[clamp(40px,7vw,88px)] leading-[1.05] tracking-tight mb-7">
-            <span className="text-zinc-100 block">Experience events,</span>
-            <span className="text-violet-400 block">without the friction</span>
+            <span className="text-[#F0F0FF] block">Experience events,</span>
+            <span className="text-[#A855F7] block">without the friction</span>
           </motion.h1>
 
           <motion.p variants={fadeUp} initial="hidden" animate="show" custom={2}
-            className="text-lg text-zinc-400 max-w-lg mx-auto mb-11 leading-relaxed">
+            className="text-lg text-[#8888AA] max-w-lg mx-auto mb-11 leading-relaxed">
             Buy, sell, and discover event tickets with M-Pesa payments,
             instant QR codes, and a fraud-proof resale marketplace.
           </motion.p>
@@ -80,8 +79,8 @@ export default function Landing() {
               { v: '50K+', l: 'Happy fans' },
             ].map((s, i) => (
               <div key={i} className="text-center">
-                <p className="font-display font-bold text-3xl text-zinc-100">{s.v}</p>
-                <p className="text-[13px] text-zinc-500 mt-1.5">{s.l}</p>
+                <p className="font-display font-bold text-3xl text-[#F0F0FF]">{s.v}</p>
+                <p className="text-[13px] text-[#6E6E96] mt-1.5">{s.l}</p>
               </div>
             ))}
           </motion.div>
@@ -96,7 +95,7 @@ export default function Landing() {
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
             className="text-center mb-16">
             <span className="eyebrow">Why EventSphere</span>
-            <h2 className="font-display font-bold text-[clamp(30px,4vw,48px)] text-zinc-100 tracking-tight">
+            <h2 className="font-display font-bold text-[clamp(30px,4vw,48px)] text-[#F0F0FF] tracking-tight">
               Everything you need, nothing you don't
             </h2>
           </motion.div>
@@ -105,11 +104,11 @@ export default function Landing() {
             {features.map((f, i) => (
               <motion.div key={i} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i * 0.4}
                 className="card p-8">
-                <div className="w-11 h-11 rounded-xl bg-violet-500/10 text-violet-400 flex items-center justify-center mb-5">
+                <div className="w-11 h-11 rounded-xl bg-[#7C3AED]/10 text-[#A855F7] flex items-center justify-center mb-5">
                   {f.icon}
                 </div>
-                <h3 className="font-display font-semibold text-[17px] text-zinc-100 mb-2">{f.title}</h3>
-                <p className="text-zinc-400 leading-relaxed text-sm">{f.desc}</p>
+                <h3 className="font-display font-semibold text-[17px] text-[#F0F0FF] mb-2">{f.title}</h3>
+                <p className="text-[#8888AA] leading-relaxed text-sm">{f.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -125,7 +124,7 @@ export default function Landing() {
               className="flex items-end justify-between mb-12 flex-wrap gap-4">
               <div>
                 <span className="eyebrow">Happening soon</span>
-                <h2 className="font-display font-bold text-[clamp(26px,3.5vw,40px)] text-zinc-100 tracking-tight">
+                <h2 className="font-display font-bold text-[clamp(26px,3.5vw,40px)] text-[#F0F0FF] tracking-tight">
                   Upcoming events
                 </h2>
               </div>
@@ -136,12 +135,72 @@ export default function Landing() {
               </Link>
             </motion.div>
 
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {published.map((event, i) => (
-                <motion.div key={event.id} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i * 0.4}>
-                  <EventCard event={event} />
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Featured — the first upcoming event, given real visual weight */}
+              <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}
+                className="md:col-span-2">
+                <Link to={`/events/${published[0].id}`} className="group block h-full">
+                  <div className="glass-card relative rounded-2xl overflow-hidden h-[420px] md:h-full">
+                    {published[0].banner_image ? (
+                      <img
+                        src={published[0].banner_image}
+                        alt={published[0].title}
+                        className="absolute inset-0 w-full h-full object-cover opacity-50 group-hover:scale-105 group-hover:opacity-60 transition-all duration-700"
+                      />
+                    ) : (
+                      <div className="absolute inset-0 bg-[#16163A]" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A18] via-[#0A0A18]/70 to-transparent" />
+
+                    <div className="relative h-full p-8 md:p-10 flex flex-col justify-end">
+                      <span className="inline-flex w-fit items-center badge badge-violet mb-4">Featured event</span>
+                      <h3 className="font-display font-bold text-2xl md:text-3xl text-[#F0F0FF] mb-3">
+                        {published[0].title}
+                      </h3>
+                      <div className="flex flex-wrap items-center gap-4 text-sm text-[#8888AA] mb-6">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar size={14} />
+                          {new Date(published[0].date).toLocaleDateString('en-KE', { day: 'numeric', month: 'short', year: 'numeric' })}
+                        </span>
+                        <span className="flex items-center gap-1.5">
+                          <MapPin size={14} />
+                          {published[0].venue}
+                        </span>
+                      </div>
+                      <span className="w-fit inline-flex items-center gap-2 text-sm font-medium text-[#F0F0FF] group-hover:text-[#A855F7] transition-colors">
+                        Discover tickets <ArrowRight size={15} />
+                      </span>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Side stack — next two events, compact */}
+              <div className="flex flex-col gap-6">
+                {published.slice(1, 3).map((event, i) => (
+                  <motion.div key={event.id} variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }} custom={i * 0.4}
+                    className="flex-1">
+                    <Link to={`/events/${event.id}`} className="group block h-full">
+                      <div className="card h-full p-6 flex flex-col justify-between">
+                        <div className="flex justify-between items-start mb-4">
+                          <div className="w-10 h-10 rounded-lg bg-[#7C3AED]/10 flex items-center justify-center">
+                            <Ticket size={18} className="text-[#A855F7]" />
+                          </div>
+                          {event.resale_allowed && <span className="badge badge-orange">Resale</span>}
+                        </div>
+                        <div>
+                          <h4 className="font-display font-semibold text-[#F0F0FF] mb-2 line-clamp-1 group-hover:text-[#A855F7] transition-colors">
+                            {event.title}
+                          </h4>
+                          <p className="text-[#8888AA] text-sm line-clamp-1">
+                            {event.venue} · {new Date(event.date).toLocaleDateString('en-KE', { day: 'numeric', month: 'short' })}
+                          </p>
+                        </div>
+                      </div>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -151,14 +210,14 @@ export default function Landing() {
 
       {/* CTA */}
       <section className="py-28 px-6 relative overflow-hidden">
-        <div className="absolute w-[440px] h-[440px] rounded-full bg-violet-600/12 blur-[100px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+        <div className="absolute w-[440px] h-[440px] rounded-full bg-[#7C3AED]/12 blur-[100px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
         <div className="max-w-2xl mx-auto relative text-center">
           <motion.div variants={fadeUp} initial="hidden" whileInView="show" viewport={{ once: true }}>
             <span className="eyebrow">Join thousands</span>
-            <h2 className="font-display font-bold text-[clamp(28px,4vw,48px)] text-zinc-100 tracking-tight leading-tight mb-5">
+            <h2 className="font-display font-bold text-[clamp(28px,4vw,48px)] text-[#F0F0FF] tracking-tight leading-tight mb-5">
               Ready to experience something amazing?
             </h2>
-            <p className="text-zinc-400 mb-10">
+            <p className="text-[#8888AA] mb-10">
               Join the community of event-goers and organisers across Kenya.
             </p>
             <div className="flex flex-wrap justify-center gap-3">

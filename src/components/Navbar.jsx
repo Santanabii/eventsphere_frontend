@@ -5,7 +5,9 @@ import { Menu, X, LogOut, User } from 'lucide-react'
 import toast from 'react-hot-toast'
 import Logo from './Logo'
 
-
+// Fixed navbar height. Referenced by every page as a plain number (h-20 = 80px)
+// so there's only one place to remember: if you change this, also update the
+// pt-32 / mt-20 spacing used on each page below the navbar.
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -32,7 +34,7 @@ export default function Navbar() {
   ]
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 h-20 bg-zinc-950/80 backdrop-blur-md border-b border-zinc-900">
+    <nav className="fixed top-0 left-0 right-0 z-50 h-20 bg-[#0A0A18]/80 backdrop-blur-md border-b border-[#16163A]">
       <div className="max-w-6xl mx-auto px-6 h-full flex items-center justify-between">
 
         <Link to="/" className="flex items-center gap-2.5">
@@ -45,7 +47,7 @@ export default function Navbar() {
               key={link.to}
               to={link.to}
               className={`text-sm transition-colors ${
-                isActive(link.to) ? 'text-zinc-100 font-medium' : 'text-zinc-400 hover:text-zinc-100'
+                isActive(link.to) ? 'text-[#F0F0FF] font-medium' : 'text-[#8888AA] hover:text-[#F0F0FF]'
               }`}
             >
               {link.label}
@@ -56,17 +58,17 @@ export default function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           {user ? (
             <>
-              <div className="flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800">
-                <div className="w-6 h-6 rounded-full bg-violet-500 flex items-center justify-center flex-shrink-0">
+              <div className="flex items-center gap-2 pl-1.5 pr-3.5 py-1.5 rounded-full bg-[#16163A] border border-[#2A2A5A]">
+                <div className="w-6 h-6 rounded-full bg-[#7C3AED] flex items-center justify-center flex-shrink-0">
                   <User size={12} className="text-white" />
                 </div>
-                <span className="text-sm text-zinc-100 font-medium">{user.username}</span>
-                <span className="text-xs text-zinc-500 capitalize">· {user.role}</span>
+                <span className="text-sm text-[#F0F0FF] font-medium">{user.username}</span>
+                <span className="text-xs text-[#6E6E96] capitalize">· {user.role}</span>
               </div>
               <button
                 onClick={handleLogout}
                 aria-label="Log out"
-                className="flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-100 transition-colors px-2"
+                className="flex items-center gap-2 text-sm text-[#8888AA] hover:text-[#F0F0FF] transition-colors px-2"
               >
                 <LogOut size={15} />
               </button>
@@ -84,7 +86,7 @@ export default function Navbar() {
         </div>
 
         <button
-          className="md:hidden text-zinc-100 p-2"
+          className="md:hidden text-[#F0F0FF] p-2"
           onClick={() => setOpen(!open)}
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
@@ -94,20 +96,20 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div className="md:hidden bg-zinc-950 border-t border-zinc-900">
+        <div className="md:hidden bg-[#0A0A18] border-t border-[#16163A]">
           <div className="max-w-6xl mx-auto px-6 py-6 flex flex-col gap-5">
             {navLinks.map(link => (
               <Link
                 key={link.to}
                 to={link.to}
-                className={`text-[15px] ${isActive(link.to) ? 'text-zinc-100 font-medium' : 'text-zinc-400'}`}
+                className={`text-[15px] ${isActive(link.to) ? 'text-[#F0F0FF] font-medium' : 'text-[#8888AA]'}`}
               >
                 {link.label}
               </Link>
             ))}
             <div className="divider" />
             {user ? (
-              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-zinc-400">
+              <button onClick={handleLogout} className="flex items-center gap-2 text-sm text-[#8888AA]">
                 <LogOut size={15} />
                 Log out
               </button>

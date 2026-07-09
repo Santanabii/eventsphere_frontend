@@ -30,7 +30,7 @@ export default function Register() {
   }
 
   return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center px-6 pt-20">
+    <div className="min-h-screen bg-[#0A0A18] flex items-center justify-center px-6 pt-20">
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}
         className="w-full max-w-md py-16">
 
@@ -38,8 +38,8 @@ export default function Register() {
           <Link to="/" className="inline-flex items-center gap-2.5">
             <Logo />
           </Link>
-          <h1 className="font-display font-bold text-2xl text-zinc-100 mt-6">Create account</h1>
-          <p className="text-zinc-400 mt-1.5 text-sm">Join Kenya's hybrid event platform</p>
+          <h1 className="font-display font-bold text-2xl text-[#F0F0FF] mt-6">Create account</h1>
+          <p className="text-[#8888AA] mt-1.5 text-sm">Join Kenya's hybrid event platform</p>
         </div>
 
         <div className="card p-8">
@@ -47,27 +47,32 @@ export default function Register() {
 
             <fieldset>
               <legend className="field-label">I am a...</legend>
-              <div className="grid grid-cols-2 gap-3">
-                {['attendee', 'organiser'].map(role => (
+              <div className="grid grid-cols-3 gap-3">
+                {['attendee', 'organiser', 'staff'].map(role => (
                   <button
                     key={role} type="button" onClick={() => setForm({ ...form, role })}
                     aria-pressed={form.role === role}
                     className={`py-3 rounded-lg border text-sm font-medium capitalize transition-colors ${
                       form.role === role
-                        ? 'border-violet-500 bg-violet-500/10 text-violet-400'
-                        : 'border-zinc-800 text-zinc-400 hover:border-zinc-700'
+                        ? 'border-[#7C3AED] bg-[#7C3AED]/10 text-[#A855F7]'
+                        : 'border-[#2A2A5A] text-[#8888AA] hover:border-[#3D3D75]'
                     }`}
                   >
                     {role}
                   </button>
                 ))}
               </div>
+              {form.role === 'staff' && (
+                <p className="text-xs text-[#8888AA] mt-2.5">
+                  Staff accounts are for gate-entry ticket scanning.
+                </p>
+              )}
             </fieldset>
 
             <div>
               <label htmlFor="username" className="field-label">Username</label>
               <div className="relative">
-                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <User size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
                 <input
                   id="username" type="text" value={form.username}
                   onChange={e => setForm({ ...form, username: e.target.value })}
@@ -79,7 +84,7 @@ export default function Register() {
             <div>
               <label htmlFor="reg-email" className="field-label">Email</label>
               <div className="relative">
-                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Mail size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
                 <input
                   id="reg-email" type="email" value={form.email}
                   onChange={e => setForm({ ...form, email: e.target.value })}
@@ -91,7 +96,7 @@ export default function Register() {
             <div>
               <label htmlFor="reg-phone" className="field-label">Phone number</label>
               <div className="relative">
-                <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Phone size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
                 <input
                   id="reg-phone" type="tel" value={form.phone_number}
                   onChange={e => setForm({ ...form, phone_number: e.target.value })}
@@ -103,7 +108,7 @@ export default function Register() {
             <div>
               <label htmlFor="reg-password" className="field-label">Password</label>
               <div className="relative">
-                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-500" />
+                <Lock size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-[#6E6E96]" />
                 <input
                   id="reg-password" type={showPassword ? 'text' : 'password'} value={form.password}
                   onChange={e => setForm({ ...form, password: e.target.value })}
@@ -113,7 +118,7 @@ export default function Register() {
                 <button
                   type="button" onClick={() => setShowPassword(!showPassword)}
                   aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 text-zinc-500 hover:text-zinc-100"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 text-[#6E6E96] hover:text-[#F0F0FF]"
                 >
                   {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
                 </button>
@@ -130,9 +135,9 @@ export default function Register() {
             </button>
           </form>
 
-          <p className="text-center text-zinc-400 text-sm mt-6">
+          <p className="text-center text-[#8888AA] text-sm mt-6">
             Already have an account?{' '}
-            <Link to="/login" className="text-violet-400 hover:text-zinc-100 transition-colors font-medium">Sign in</Link>
+            <Link to="/login" className="text-[#A855F7] hover:text-[#F0F0FF] transition-colors font-medium">Sign in</Link>
           </p>
         </div>
       </motion.div>
