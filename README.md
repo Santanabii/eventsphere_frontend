@@ -72,7 +72,7 @@ This is almost entirely one variable (`VITE_API_URL`), plus two things to check 
    ```python
    CORS_ALLOWED_ORIGINS = [
        "http://localhost:5173",
-       "https://your-app.vercel.app",   # add your actual Vercel domain
+       "https://eventsphere-frontend-iota.vercel.app/",   
    ]
    ```
 2. **ALLOWED_HOSTS** — must include your Render backend's own domain (e.g. `eventsphere-api.onrender.com`).
