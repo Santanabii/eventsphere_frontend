@@ -15,6 +15,10 @@ api.interceptors.request.use((config) => {
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
   }
+  // If data is FormData, let browser set Content-Type automatically
+  if (config.data instanceof FormData) {
+    delete config.headers['Content-Type'];
+  }
   return config;
 });
 
@@ -55,7 +59,7 @@ export const authAPI = {
 export const eventsAPI = {
   list: () => api.get('/api/events/'),
   detail: (id) => api.get(`/api/events/${id}/`),
-  create: (data) => api.post('/api/events/', data),
+  create: (data) => api.post('/api/events/', data),   // data is FormData from CreateEvent
   update: (id, data) => api.put(`/api/events/${id}/`, data),
   delete: (id) => api.delete(`/api/events/${id}/`),
   createTier: (eventId, data) => api.post(`/api/events/${eventId}/tiers/`, data),
