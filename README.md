@@ -42,7 +42,7 @@ src/
       Dashboard.jsx    CreateEvent.jsx    Analytics.jsx
 ```
 
-> `context/AuthContext.jsx` and `services/api.js` aren't part of this delivery bundle since they were provided separately — make sure both are present in your actual project at those exact paths, since every page imports from them.
+
 
 ## Local setup
 
@@ -75,7 +75,7 @@ This is almost entirely one variable (`VITE_API_URL`), plus two things to check 
    ]
    ```
 2. **ALLOWED_HOSTS** — must include your Render backend's own domain (e.g. `eventsphere-api.onrender.com`).
-3. **WebSockets** — the Analytics page derives its WebSocket URL by swapping `http→ws` / `https→wss` on `VITE_API_URL`. This only works if Channels/Daphne is actually serving WebSocket connections on your Render backend (a plain `gunicorn`-only deploy won't handle it) — confirm your Render service's start command uses Daphne/an ASGI server, not just WSGI.
+
 
 ## Deployment
 
