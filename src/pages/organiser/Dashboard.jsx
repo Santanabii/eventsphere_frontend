@@ -91,6 +91,11 @@ export default function Dashboard() {
                   <div className="flex items-center gap-3 flex-shrink-0">
                     <span className={`badge capitalize ${statusBadge[event.status] || 'badge-muted'}`}>{event.status}</span>
                     <span className="text-xs text-[#6E6E96]">{event.tiers?.length || 0} tiers</span>
+                    <Link to={`/organiser/edit-event/${event.id}`}>
+                      <button className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#16163A] border border-[#2A2A5A] text-[#8888AA] hover:text-[#F0F0FF] transition-colors text-sm">
+                        <Edit size={14} /> Edit
+                      </button>
+                    </Link>
                     <Link to={`/organiser/analytics/${event.id}`}>
                       <button className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-[#7C3AED]/10 text-[#A855F7] hover:bg-[#7C3AED]/15 transition-colors text-sm">
                         <BarChart3 size={14} /> Analytics

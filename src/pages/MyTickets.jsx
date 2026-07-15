@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { motion, AnimatePresence } from 'framer-motion'
-import { Ticket, Calendar, MapPin, QrCode, Tag, X } from 'lucide-react'
+import { Ticket, Calendar, MapPin, QrCode, Tag, X, Maximize2 } from 'lucide-react'
+import { QRCodeSVG } from 'qrcode.react'
 import Navbar from '../components/Navbar'
 import { ticketsAPI, marketplaceAPI } from '../services/api'
 import toast from 'react-hot-toast'
@@ -10,6 +11,7 @@ export default function MyTickets() {
   const queryClient = useQueryClient()
   const [listingTicket, setListingTicket] = useState(null)
   const [askingPrice, setAskingPrice] = useState('')
+  const [qrTicket, setQrTicket] = useState(null)
 
   const { data: tickets, isLoading } = useQuery({
     queryKey: ['my-tickets'],
@@ -22,6 +24,13 @@ export default function MyTickets() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [listingTicket])
+
+  useEffect(() => {
+    if (!qrTicket) return
+    const onKey = (e) => { if (e.key === 'Escape') setQrTicket(null) }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [qrTicket])
 
   const { mutate: createListing, isPending: listing } = useMutation({
     mutationFn: (data) => marketplaceAPI.createListing(data),
@@ -91,6 +100,12 @@ export default function MyTickets() {
                     <div className="mt-4 flex items-center gap-2">
                       <QrCode size={14} className="text-[#6E6E96]" />
                       <code className="text-xs text-[#8888AA] bg-[#0A0A18] px-3 py-1 rounded-lg">{ticket.qr_token}</code>
+                      <button
+                        onClick={() => setQrTicket(ticket)}
+                        className="flex items-center gap-1.5 text-xs text-[#A855F7] hover:text-[#F0F0FF] transition-colors ml-1"
+                      >
+                        <Maximize2 size={12} /> Show QR
+                      </button>
                     </div>
                   </div>
 
@@ -107,6 +122,37 @@ export default function MyTickets() {
           )}
         </motion.div>
       </div>
+
+      {/* Full-size QR — this is what actually gets scanned at the gate.
+          Rendered entirely client-side from ticket.qr_token, so it works
+          regardless of whether the confirmation email/PDF ever arrived. */}
+      <AnimatePresence>
+        {qrTicket && (
+          <div
+            className="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 flex items-center justify-center px-6"
+            role="dialog" aria-modal="true" aria-labelledby="qr-modal-title"
+            onClick={() => setQrTicket(null)}
+          >
+            <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.96 }}
+              className="card p-8 w-full max-w-sm text-center" onClick={(e) => e.stopPropagation()}>
+              <div className="flex items-center justify-between mb-6">
+                <h3 id="qr-modal-title" className="font-display font-semibold text-lg text-[#F0F0FF]">Entry QR code</h3>
+                <button onClick={() => setQrTicket(null)} aria-label="Close" className="text-[#6E6E96] hover:text-[#F0F0FF]">
+                  <X size={18} />
+                </button>
+              </div>
+
+              <div className="bg-white rounded-2xl p-6 inline-block">
+                <QRCodeSVG value={qrTicket.qr_token} size={220} />
+              </div>
+
+              <p className="text-[#F0F0FF] font-medium mt-5">{qrTicket.event_title}</p>
+              <p className="text-sm text-[#8888AA] mt-1">{qrTicket.tier_name}</p>
+              <p className="text-xs text-[#6E6E96] mt-4">Present this to gate staff for entry</p>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
 
       <AnimatePresence>
         {listingTicket && (

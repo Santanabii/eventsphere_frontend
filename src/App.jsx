@@ -7,16 +7,18 @@ import EventDetail from './pages/EventDetail'
 import Login from './pages/Login'
 import Register from './pages/Register'
 import MyTickets from './pages/MyTickets'
+import MyListings from './pages/MyListings'
 import Marketplace from './pages/Marketplace'
 import Dashboard from './pages/organiser/Dashboard'
 import CreateEvent from './pages/organiser/CreateEvent'
+import EditEvent from './pages/organiser/EditEvent'
 import Analytics from './pages/organiser/Analytics'
 import Scanner from './pages/Scanner'
 
 function ProtectedRoute({ children, role }) {
   const { user, loading } = useAuth()
   if (loading) return (
-    <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
+    <div className="min-h-screen bg-[#0A0A18] flex items-center justify-center">
       <div className="spinner" />
     </div>
   )
@@ -34,9 +36,11 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/my-tickets" element={<ProtectedRoute><MyTickets /></ProtectedRoute>} />
+      <Route path="/my-listings" element={<ProtectedRoute><MyListings /></ProtectedRoute>} />
       <Route path="/marketplace" element={<Marketplace />} />
       <Route path="/organiser/dashboard" element={<ProtectedRoute role="organiser"><Dashboard /></ProtectedRoute>} />
       <Route path="/organiser/create-event" element={<ProtectedRoute role="organiser"><CreateEvent /></ProtectedRoute>} />
+      <Route path="/organiser/edit-event/:id" element={<ProtectedRoute role="organiser"><EditEvent /></ProtectedRoute>} />
       <Route path="/organiser/analytics/:id" element={<ProtectedRoute role="organiser"><Analytics /></ProtectedRoute>} />
       <Route path="/scan" element={<ProtectedRoute role="staff"><Scanner /></ProtectedRoute>} />
     </Routes>

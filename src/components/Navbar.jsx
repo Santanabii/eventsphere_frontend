@@ -5,9 +5,7 @@ import { Menu, X, LogOut, User } from 'lucide-react'
 import toast from 'react-hot-toast'
 import Logo from './Logo'
 
-// Fixed navbar height. Referenced by every page as a plain number (h-20 = 80px)
-// so there's only one place to remember: if you change this, also update the
-// pt-32 / mt-20 spacing used on each page below the navbar.
+
 export default function Navbar() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
@@ -30,7 +28,7 @@ export default function Navbar() {
     { to: '/marketplace', label: 'Marketplace' },
     ...(user?.role === 'organiser' ? [{ to: '/organiser/dashboard', label: 'Dashboard' }] : []),
     ...(user?.role === 'staff' ? [{ to: '/scan', label: 'Scanner' }] : []),
-    ...(user?.role === 'attendee' ? [{ to: '/my-tickets', label: 'My Tickets' }] : []),
+    ...(user?.role === 'attendee' ? [{ to: '/my-tickets', label: 'My Tickets' }, { to: '/my-listings', label: 'My Listings' }] : []),
   ]
 
   return (
